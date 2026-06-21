@@ -1,0 +1,68 @@
+{
+  "tracker": {
+    "title": "Работа трекера стартап-команд",
+    "desc": "Скиллы для сессий трекинга: подготовка, оркестрация, дебриф, методологии TOC/TRIZ, разбор созвонов в тезисы.",
+    "skills": [
+      "track",
+      "track-prep",
+      "track-orch",
+      "track-debrief",
+      "l-t-challenge",
+      "l-t-svetofor",
+      "l-t-jtbd",
+      "l-t-jtbd-fit",
+      "thesis-extraction",
+      "l-w-granola",
+      "flyinglogic",
+      "l-a-ikr",
+      "l-a-rat"
+    ],
+    "missing": [],
+    "count": 13,
+    "zip": "/tmp/claude/collections/tracker-v1.zip"
+  },
+  "larp": {
+    "title": "Работа LARP-мастера",
+    "desc": "Скиллы для разработки и проведения живых ролевых игр: сценарий, сеттинг, персонажи, механики, документация, портреты.",
+    "skills": [
+      "l-g-algo",
+      "l-g-archivist",
+      "l-g-box",
+      "l-g-call",
+      "l-g-canon",
+      "l-g-catalog",
+      "l-g-cats",
+      "l-g-char",
+      "l-g-check",
+      "l-g-check-mechanic",
+      "l-g-create",
+      "l-g-delo",
+      "l-g-design",
+      "l-g-doc",
+      "l-g-dybowski",
+      "l-g-edit",
+      "l-g-extract",
+      "l-g-funeral-design",
+      "l-g-interview",
+      "l-g-mg",
+      "l-g-midjourney",
+      "l-g-neurolenoran",
+      "l-g-nordic",
+      "l-g-nri",
+      "l-g-portrait",
+      "l-g-scriptdoc",
+      "l-g-setting",
+      "l-g-suno",
+      "l-g-syuzhet",
+      "l-g-vai",
+      "l-k-stories",
+      "neurolenoran",
+      "playtest-analysis"
+    ],
+    "missing": [
+      "l-d-portrait"
+    ],
+    "count": 33,
+    "zip": "/tmp/claude/collections/larp-v1.zip"
+  }
+}
