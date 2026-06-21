@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skill Collections — кураторские наборы скиллов Claude Code</title>
+<style>
+:root{--ink:#17171c;--mut:#6b6b76;--line:#e7e7ea;--acc:#4f46e5;--bg:#f7f7f8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:25px;letter-spacing:-.02em;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 30px}
+section{margin:0 0 38px}
+.ch{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.ch h2{font-size:19px;margin:0}
+.dl{font-size:13px;background:var(--acc);color:#fff;padding:7px 14px;border-radius:9px;text-decoration:none;font-weight:560}
+.cd{color:var(--mut);margin:0 0 16px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.sk{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.skh code{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;font-weight:650;color:var(--acc)}
+.skd{font-size:13.5px;color:#30303a;margin:6px 0 8px}
+.tr{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.t{font-size:11px;color:#54546a;background:#f2f2f7;border-radius:6px;padding:2px 7px}
+.nf{font-size:11.5px;color:#9a9aa5}
+footer{color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:18px;margin-top:10px}
+footer a{color:var(--acc)}
+</style></head><body><div class="wrap">
+<h1>Skill Collections</h1>
+<p class="sub">Кураторские наборы скиллов <b>Claude Code</b> — читай состав ниже, скачивай zip, распаковывай в <code>~/.claude/</code>.</p>
+<section>
+      <div class="ch"><h2>Работа трекера стартап-команд</h2>
+        <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/tracker-v1/tracker-v1.zip">Скачать .zip (13 скиллов)</a></div>
+      <p class="cd">Скиллы для сессий трекинга: подготовка, оркестрация, дебриф, методологии TOC/TRIZ, разбор созвонов в тезисы.</p>
+      <div class="grid"><div class="sk">
+      <div class="skh"><code>/track</code></div>
+      <div class="skd">AI-ассистент трекера стартап-команд: фокус сессий, методологии (TOC/TRIZ), декомпозиция целей, 4 субагента</div>
+      <div class="tr"><span class="t">«track status»</span><span class="t">«track collect»</span><span class="t">«дашборд команды»</span><span class="t">«статус команды»</span><span class="t">«собери материалы»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/track-prep</code></div>
+      <div class="skd">Подготовка к сессии трекинга стартап-команды</div>
+      <div class="tr"><span class="t">«подготовка к сессии»</span><span class="t">«prep»</span><span class="t">«track prep»</span><span class="t">«подготовься к трекингу»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/track-orch</code></div>
+      <div class="skd">Оркестратор трекинга стартап-команд</div>
+      <div class="tr"><span class="t">«контракт сессии»</span><span class="t">«что снимаем сегодня»</span><span class="t">«track orch»</span><span class="t">«трекинг команды»</span><span class="t">«bottleneck session»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/track-debrief</code></div>
+      <div class="skd">Разбор после сессии трекинга стартап-команды</div>
+      <div class="tr"><span class="t">«разбор сессии»</span><span class="t">«debrief»</span><span class="t">«track debrief»</span><span class="t">«итоги трекинга»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-t-challenge</code></div>
+      <div class="skd">Self-challenge трекера — извлечь пары &#x27;вопрос команды → твоя позиция&#x27; из сессии и методически проверить каждую позицию на фальсифицируемость</div>
+      <div class="tr"><span class="t">«вопрос команды → твоя позиция»</span><span class="t">«challenge позиции»</span><span class="t">«проверь мои ответы»</span><span class="t">«self-challenge»</span><span class="t">«опровергни меня»</span><span class="t">«проверь мою диагностику»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-t-svetofor</code></div>
+      <div class="skd">Светофор + спидометр — быстрый чек прогресса команды за трекинговую сессию</div>
+      <div class="tr"><span class="t">«светофор»</span><span class="t">«спидометр»</span><span class="t">«прогресс сессии»</span><span class="t">«traffic light check»</span><span class="t">«session progress check»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-t-jtbd</code></div>
+      <div class="skd">JTBD-анализ интервью по методологии &#x27;Спроси маму&#x27; (Mom Test)</div>
+      <div class="tr"><span class="t">«спроси маму»</span><span class="t">«разбери интервью jtbd»</span><span class="t">«jtbd analysis»</span><span class="t">«mom test»</span><span class="t">«jobs to be done»</span><span class="t">«проанализируй кастдев»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-t-jtbd-fit</code></div>
+      <div class="skd">JTBD Fit Check — проверка product-market fit спеки по Jobs-to-be-Done (Christensen, Ulwick)</div>
+      <div class="tr"><span class="t">«jtbd check»</span><span class="t">«проверка fit»</span><span class="t">«jobs to be done review»</span><span class="t">«попадание в работу пользователя»</span><span class="t">«spec review jtbd»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/thesis-extraction</code></div>
+      <div class="skd">Извлечение ВСЕХ тезисов из транскрипта: кластеризация по темам, граф связей (дерево веток дискуссии), нарратив по каждой ветке</div>
+      <div class="tr"><span class="t">«вытащи тезисы»</span><span class="t">«извлеки тезисы из транскрипта»</span><span class="t">«построй дерево тезисов»</span><span class="t">«граф аргументов»</span><span class="t">«thesis extraction»</span><span class="t">«разложи дискуссию на тезисы»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-w-granola</code></div>
+      <div class="skd">Универсальный анализ встречи из Granola-транскрипта</div>
+      <div class="tr"><span class="t">«разбери granola»</span><span class="t">«granola transcript»</span><span class="t">«обработай транскрипт из granola»</span><span class="t">«granola analysis»</span><span class="t">«встреча из гранолы»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/flyinglogic</code></div>
+      <div class="skd">Генератор диаграмм Flying Logic (нативный формат .xlogic через JSON+генератор) и деревьев ТОС</div>
+      <div class="tr"><span class="t">«флаинглоджик»</span><span class="t">«flyinglogic»</span><span class="t">«flying logic»</span><span class="t">«сделай в flying logic»</span><span class="t">«экспорт в flying logic»</span><span class="t">«.xlogic»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-a-ikr</code></div>
+      <div class="skd">ИКР — Идеальный Конечный Результат (ТРИЗ)</div>
+      <div class="tr"><span class="t">«идеальный результат»</span><span class="t">«триз»</span><span class="t">«противоречие»</span><span class="t">«как решить без компромиссов»</span><span class="t">«ideal final result»</span><span class="t">«triz»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-a-rat</code></div>
+      <div class="skd">Risk Assumption Test — анализ рисков продуктовой идеи по Strategyzer</div>
+      <div class="tr"><span class="t">«проверь допущения»</span><span class="t">«risk assumptions»</span><span class="t">«что должно быть правдой»</span><span class="t">«test assumptions»</span><span class="t">«assumptions mapping»</span></div>
+      
+    </div></div>
+    </section><section>
+      <div class="ch"><h2>Работа LARP-мастера</h2>
+        <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/larp-v1/larp-v1.zip">Скачать .zip (32 скиллов)</a></div>
+      <p class="cd">Скиллы для разработки и проведения живых ролевых игр: сценарий, сеттинг, персонажи, механики, документация, портреты.</p>
+      <div class="grid"><div class="sk">
+      <div class="skh"><code>/l-g-algo</code></div>
+      <div class="skd">Создание LARP через алгоритмы</div>
+      <div class="tr"><span class="t">«алгоритм создания larp»</span><span class="t">«по методу тананга»</span><span class="t">«по хавской»</span><span class="t">«false paths»</span><span class="t">«partisans method»</span><span class="t">«old house»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-archivist</code></div>
+      <div class="skd">Нежный Архивист — строитель живых миров из лора</div>
+      <div class="tr"><span class="t">«оживи мир»</span><span class="t">«сделай мир глубже»</span><span class="t">«worldbuilding»</span><span class="t">«lore expansion»</span><span class="t">«расширь лор»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-box</code></div>
+      <div class="skd">Упаковка LARP в коробку для проведения без автора</div>
+      <div class="tr"><span class="t">«укоробь игру»</span><span class="t">«game in a box»</span><span class="t">«larp packaging»</span><span class="t">«упакуй игру»</span><span class="t">«коробка для larp»</span><span class="t">«передать игру другому мастеру»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-call</code></div>
+      <div class="skd">Анализ транскриптов созвонов по LARP</div>
+      <div class="tr"><span class="t">«разбери созвон по игре»</span><span class="t">«larp call analysis»</span><span class="t">«конспект встречи мастеров»</span><span class="t">«транскрипт мастерки»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-canon</code></div>
+      <div class="skd">Хранитель Канона — систематизатор лора в source of truth</div>
+      <div class="tr"><span class="t">«систематизируй лор»</span><span class="t">«canon keeper»</span><span class="t">«source of truth»</span><span class="t">«упорядочь канон»</span><span class="t">«проверь лор на противоречия»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-catalog</code></div>
+      <div class="skd">Каталог 365 механик: 185 метатехник LARP + 180 механик настольных игр (BGG)</div>
+      <div class="tr"><span class="t">«какие механики»</span><span class="t">«mechanics catalog»</span><span class="t">«справочник техник»</span><span class="t">«покажи механики»</span><span class="t">«какая техника подходит для...»</span><span class="t">«what technique for...»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-cats</code></div>
+      <div class="skd">CATS Framework для LARP — быстрое выстраивание ожиданий перед игрой</div>
+      <div class="tr"><span class="t">«cats»</span><span class="t">«выстроить ожидания»</span><span class="t">«game expectations»</span><span class="t">«перед началом игры»</span><span class="t">«concept aim tone subject»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-char</code></div>
+      <div class="skd">Создание персонажа для LARP через психологическое интервью</div>
+      <div class="tr"><span class="t">«создай персонажа»</span><span class="t">«загрузка персонажа»</span><span class="t">«character interview»</span><span class="t">«загрузалка»</span><span class="t">«психологический профиль персонажа»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-check</code></div>
+      <div class="skd">Проверка целостности LARP через призму Nordic подхода</div>
+      <div class="tr"><span class="t">«проверь игру»</span><span class="t">«larp check»</span><span class="t">«валидация сценария»</span><span class="t">«целостность larp»</span><span class="t">«готова ли игра»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-check-mechanic</code></div>
+      <div class="skd">Проверка игровой механики на последствия</div>
+      <div class="tr"><span class="t">«проверь механику»</span><span class="t">«что сломается»</span><span class="t">«check mechanic»</span><span class="t">«тест механики»</span><span class="t">«edge cases механики»</span><span class="t">«проверь механику»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-create</code></div>
+      <div class="skd">Помощник по разработке сценариев LARP</div>
+      <div class="tr"><span class="t">«создай игру»</span><span class="t">«сценарий larp»</span><span class="t">«game design larp»</span><span class="t">«придумай ролевую игру»</span><span class="t">«новая larp»</span><span class="t">«сделай сценарий»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-delo</code></div>
+      <div class="skd">Конструктор дела для Кабуки-кабинетки LARP &#x27;Невидимый монах&#x27;. Интервью по 5 блокам → схема дела → полный бриф по канону</div>
+      <div class="tr"><span class="t">«невидимый монах»</span><span class="t">«собери дело»</span><span class="t">«новое дело кабуки»</span><span class="t">«дело для кабинетки»</span><span class="t">«построй дело по мотивам»</span><span class="t">«делокон»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-design</code></div>
+      <div class="skd">Конструктор LARP-игры на базе каталога 159 метатехник из library.lance.ru (47 Nordic + 112 русских)</div>
+      <div class="tr"><span class="t">«создай игру из механик»</span><span class="t">«собери игру из техник»</span><span class="t">«подбери механики для игры»</span><span class="t">«какие техники безопасности взять»</span><span class="t">«хочу игру с блидом»</span><span class="t">«подбери метатехники»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-doc</code></div>
+      <div class="skd">Полная документация LARP по Nordic стандартам</div>
+      <div class="tr"><span class="t">«задокументируй larp»</span><span class="t">«larp documentation»</span><span class="t">«director box»</span><span class="t">«руководство мастера»</span><span class="t">«game flow document»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-dybowski</code></div>
+      <div class="skd">Субагент Дыбовского — провокатор экзистенциальной глубины в геймдизайне</div>
+      <div class="tr"><span class="t">«дыбовский»</span><span class="t">«экзистенциальная глубина»</span><span class="t">«dybowski»</span><span class="t">«provocateur»</span><span class="t">«добавь глубины в игру»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-edit</code></div>
+      <div class="skd">Редактирование прозы и персонажей для LARP/литературы</div>
+      <div class="tr"><span class="t">«отредактируй текст персонажа»</span><span class="t">«prose editing»</span><span class="t">«редактура загруза»</span><span class="t">«улучши персонажа»</span><span class="t">«show don»</span><span class="t">«literary editing»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-extract</code></div>
+      <div class="skd">Извлечение идей из конспектов по геймдизайну</div>
+      <div class="tr"><span class="t">«разбери конспект»</span><span class="t">«извлеки идеи из текста»</span><span class="t">«extract game ideas»</span><span class="t">«конспект по геймдизайну»</span><span class="t">«идеи из лекции»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-funeral-design</code></div>
+      <div class="skd">Дизайн похоронной механики LARP &#x27;Невидимый монах&#x27;</div>
+      <div class="tr"><span class="t">«невидимый монах»</span><span class="t">«дизайн похорон»</span><span class="t">«funeral design»</span><span class="t">«похоронная механика»</span><span class="t">«сцена с мертвецом»</span><span class="t">«этапы похорон»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-interview</code></div>
+      <div class="skd">Интервью с мастером для создания описания LARP</div>
+      <div class="tr"><span class="t">«возьми интервью у мастера»</span><span class="t">«master interview»</span><span class="t">«описание игры»</span><span class="t">«анонс larp»</span><span class="t">«шаблон анонса игры»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-mg</code></div>
+      <div class="skd">Анализ папки Мастерки LARP-проекта</div>
+      <div class="tr"><span class="t">«проанализируй мастерку»</span><span class="t">«разбери мастерскую группу»</span><span class="t">«mg analysis»</span><span class="t">«дерево решений larp»</span><span class="t">«история решений игры»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-midjourney</code></div>
+      <div class="skd">Синтаксис и параметры Midjourney</div>
+      <div class="tr"><span class="t">«промпт для midjourney»</span><span class="t">«mj prompt»</span><span class="t">«midjourney параметры»</span><span class="t">«как написать для миджорни»</span><span class="t">«midjourney syntax»</span><span class="t">«--ar --v --style»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-neurolenoran</code></div>
+      <div class="skd">Нейроленоран — AI-персона режиссёра/продюсера для проекта &#x27;Невидимый монах&#x27; (LARP)</div>
+      <div class="tr"><span class="t">«невидимый монах»</span><span class="t">«леноран»</span><span class="t">«нейроленоран»</span><span class="t">«невидимый монах ревью»</span><span class="t">«проверь сцену»</span><span class="t">«инструктаж сцены»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-nordic</code></div>
+      <div class="skd">Синтезированный скрипт создания Nordic LARP</div>
+      <div class="tr"><span class="t">«nordic larp»</span><span class="t">«скандинавский подход»</span><span class="t">«создай larp по nordic»</span><span class="t">«stenros method»</span><span class="t">«koljonen»</span><span class="t">«bleed-in/bleed-out»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-nri</code></div>
+      <div class="skd">Мастер настольных ролевых игр (НРИ/TTRPG)</div>
+      <div class="tr"><span class="t">«проведи нри»</span><span class="t">«ttrpg session»</span><span class="t">«настольная ролевая»</span><span class="t">«создай приключение»</span><span class="t">«rpg master»</span><span class="t">«кампания»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-portrait</code></div>
+      <div class="skd">Промпт для генерации портретов в Midjourney/DALL-E</div>
+      <div class="tr"><span class="t">«сгенерируй портрет»</span><span class="t">«portrait prompt»</span><span class="t">«промпт для портрета»</span><span class="t">«нарисуй персонажа»</span><span class="t">«character portrait»</span><span class="t">«аватар персонажа»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-scriptdoc</code></div>
+      <div class="skd">Скрипт-доктор интерактивного нарратива</div>
+      <div class="tr"><span class="t">«проверь сценарий»</span><span class="t">«script doctor»</span><span class="t">«структура эпизода»</span><span class="t">«episode structure»</span><span class="t">«story circle»</span><span class="t">«арка эпизода»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-setting</code></div>
+      <div class="skd">10 методик создания сеттинга для LARP и художественных произведений</div>
+      <div class="tr"><span class="t">«придумай мир»</span><span class="t">«создай сеттинг»</span><span class="t">«worldbuilding»</span><span class="t">«мир для игры»</span><span class="t">«setting creation»</span><span class="t">«метод дракона»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-suno</code></div>
+      <div class="skd">Синтаксис и параметры Suno для генерации музыки</div>
+      <div class="tr"><span class="t">«промпт для suno»</span><span class="t">«suno синтаксис»</span><span class="t">«как написать для суно»</span><span class="t">«музыкальный промпт»</span><span class="t">«suno tags»</span><span class="t">«metatags suno»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-syuzhet</code></div>
+      <div class="skd">Пошаговый конструктор сюжета для LARP</div>
+      <div class="tr"><span class="t">«новый сюжет»</span><span class="t">«придумай историю для игры»</span><span class="t">«larp plot»</span><span class="t">«сюжетная линия»</span><span class="t">«narrative design larp»</span><span class="t">«новый сюжет»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/l-g-vai</code></div>
+      <div class="skd">Методика от Вая для создания LARP</div>
+      <div class="tr"><span class="t">«по методу вая»</span><span class="t">«vai method»</span><span class="t">«классический подход к larp»</span><span class="t">«базовые принципы larp»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/neurolenoran</code></div>
+      <div class="skd">Нейроленоран — AI-персона продюсера LARP (по образу Андрея Салика). Собирает разрозненные идеи в связный документ, находит дыры, применяет 3 принципа и 5 проверок</div>
+      <div class="tr"><span class="t">«леноран»</span><span class="t">«продюсер larp»</span><span class="t">«neurolenoran»</span><span class="t">«собери идеи в документ»</span><span class="t">«как бы салик сказал»</span></div>
+      
+    </div><div class="sk">
+      <div class="skh"><code>/playtest-analysis</code></div>
+      <div class="skd">Анализ плейтест-фидбека: CSV -&gt; темы -&gt; дашборд</div>
+      <div class="tr"><span class="t">«проанализируй плейтест»</span><span class="t">«playtest analysis»</span><span class="t">«фидбек плейтеста»</span><span class="t">«отзывы плейтеста»</span><span class="t">«playtest dashboard»</span></div>
+      
+    </div></div>
+    </section>
+<footer>Источник: <a href="https://github.com/kulakov/skill-collections">github.com/kulakov/skill-collections</a> · скиллы в формате SKILL.md, работают в Claude Code, Codex, Cursor и др.</footer>
+</div></body></html>
