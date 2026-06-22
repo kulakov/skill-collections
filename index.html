@@ -37,6 +37,11 @@ footer{color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);paddin
 .code code{flex:1;background:#1e1e26;color:#eee;font-size:11.5px;padding:9px 11px;border-radius:8px;font-family:ui-monospace,Menlo,monospace;overflow-x:auto;white-space:nowrap}
 .cp{border:none;background:var(--acc);color:#fff;font-size:12px;padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:560;white-space:nowrap}
 .zipalt{font-size:11.5px;color:var(--mut);margin-top:7px}.ic{font-family:ui-monospace,Menlo,monospace;font-size:11px;background:#f1f1f4;padding:1px 5px;border-radius:4px}
+.m-full{font-size:13px;color:#3a3a44;line-height:1.55;max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fafafb}
+.m-full h3,.m-full h4,.m-full h5{margin:12px 0 5px;font-size:13.5px;font-weight:640}.m-full h3:first-child,.m-full h4:first-child{margin-top:0}
+.m-full code{background:#eef0fe;padding:1px 5px;border-radius:4px;font-size:12px;font-family:ui-monospace,Menlo,monospace}
+.m-full pre{background:#1e1e26;color:#eee;padding:10px;border-radius:8px;overflow-x:auto;font-size:11.5px;margin:8px 0}
+.m-full li{margin-left:18px;margin-bottom:2px}.m-full table{font-size:12px;border-collapse:collapse}
 .m-foot{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}.gh{font-size:13px;color:var(--acc);text-decoration:none;font-weight:560}.gh:hover{text-decoration:underline}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(18px);background:var(--ink);color:#fff;font-size:13px;padding:10px 17px;border-radius:10px;opacity:0;pointer-events:none;transition:.22s;z-index:50}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -44,18 +49,33 @@ footer{color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);paddin
 const D=JSON.parse(document.getElementById('d').textContent);
 const bd=document.getElementById('bd'),md=document.getElementById('md');
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mdr(t){
+  t=t.replace(/^---[\s\S]*?\n---\s*/,'');           // убрать frontmatter
+  t=esc(t);
+  t=t.replace(/```[\s\S]*?```/g,m=>'<pre>'+m.replace(/```[a-z]*\n?/g,'')+'</pre>');
+  t=t.replace(/^#### (.*)$/gm,'<h5>$1</h5>').replace(/^### (.*)$/gm,'<h4>$1</h4>')
+     .replace(/^## (.*)$/gm,'<h3>$1</h3>').replace(/^# (.*)$/gm,'<h3>$1</h3>');
+  t=t.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/`([^`]+)`/g,'<code>$1</code>');
+  t=t.replace(/^\s*[-*] (.*)$/gm,'<li>$1</li>');
+  t=t.replace(/\n{2,}/g,'<br><br>').replace(/\n/g,'<br>');
+  return t;
+}
 function open_(id){
   const x=D[id]; if(!x)return;
   const ex=x.example?`<div class="m-sec"><h4>Пример запроса · синтетический</h4><div class="m-ex">«${esc(x.example)}»</div></div>`:'';
   const zipalt=x.isdir?`<div class="zipalt">папка со скриптами — нужен Node для degit, или <a class="gh" href="${esc(x.zip)}">скачай .zip коллекции</a> и распакуй в <code class="ic">~/.claude/skills/</code></div>`:'';
   md.innerHTML=`<button class="x" id="mx">×</button>
     <div class="m-nm">/${esc(x.name)}</div><div class="m-desc">${esc(x.desc)}</div>${ex}
+    <div class="m-sec"><h4>Подробное описание</h4><div class="m-full" id="mfull">загрузка…</div></div>
     <div class="m-sec"><h4>Скопировать себе ${x.isdir?'(папка-скилл)':'(команда)'}</h4>
       <div class="code"><code>${esc(x.install)}</code><button class="cp" id="cp">Копировать</button></div>${zipalt}</div>
     <div class="m-foot"><a class="gh" href="${esc(x.git)}" target="_blank">Открыть на GitHub →</a></div>`;
-  bd.classList.add('show');
+  bd.classList.add('show'); md.scrollTop=0;
   document.getElementById('mx').onclick=close_;
   document.getElementById('cp').onclick=()=>navigator.clipboard?.writeText(x.install).then(()=>toast('Команда скопирована'));
+  fetch(x.raw).then(r=>r.ok?r.text():Promise.reject()).then(txt=>{
+    const el=document.getElementById('mfull'); if(el)el.innerHTML=mdr(txt);
+  }).catch(()=>{const el=document.getElementById('mfull'); if(el)el.innerHTML='<a class="gh" href="'+esc(x.git)+'" target="_blank">смотреть на GitHub →</a>';});
 }
 function close_(){bd.classList.remove('show')}
 document.querySelectorAll('.sk').forEach(el=>el.onclick=()=>open_(el.dataset.id));
