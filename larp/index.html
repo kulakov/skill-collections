@@ -13,11 +13,15 @@ h1{font-size:25px;letter-spacing:-.02em;margin:0 0 6px} .sub{color:var(--mut);ma
 .sk:hover{border-color:var(--acc);transform:translateY(-1px);box-shadow:0 6px 18px rgba(20,20,45,.07)}
 .skh code{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;font-weight:650;color:var(--acc)}
 .skd{font-size:13px;color:#30303a;margin-top:6px}
-.coll{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;break-inside:avoid;margin-bottom:14px;transition:.12s}
-.coll:hover{border-color:var(--acc);box-shadow:0 7px 20px rgba(20,20,45,.07)}
-.coll h2{margin:0 0 4px;font-size:18px}.coll h2 a{text-decoration:none;color:var(--ink)}.coll:hover h2 a{color:var(--acc)}
-.coll .cnt{font-size:12.5px;color:var(--mut);margin-bottom:10px}
-.coll .row{display:flex;gap:12px;align-items:center}
+.colls{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:4px}
+.coll{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;display:flex;flex-direction:column;transition:.14s;position:relative;overflow:hidden}
+.coll::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--acc),#7c3aed)}
+.coll:hover{border-color:var(--acc);transform:translateY(-2px);box-shadow:0 12px 30px rgba(20,20,45,.10)}
+.coll h2{margin:14px 0 10px;font-size:18px;line-height:1.25}.coll h2 a{text-decoration:none;color:var(--ink)}.coll:hover h2 a{color:var(--acc)}
+.badge{display:inline-block;font-size:12px;color:var(--acc);background:#eef0fe;padding:3px 10px;border-radius:999px;font-weight:600;align-self:flex-start}
+.coll p{color:var(--mut);font-size:13.5px;margin:0 0 18px;flex:1}
+.coll .row{display:flex;gap:12px;align-items:center;margin-top:auto}
+.coll .row .open{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--acc)}
 .open{font-size:13px;font-weight:560;text-decoration:none}
 footer{color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
 .backdrop{position:fixed;inset:0;background:rgba(20,20,35,.42);display:none;align-items:flex-start;justify-content:center;padding:48px 20px;overflow:auto;z-index:40}
