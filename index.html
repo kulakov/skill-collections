@@ -1,580 +1,75 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Skill Collections — кураторские наборы скиллов Claude Code</title>
+<title>Skill Collections — наборы скиллов Claude Code</title>
 <style>
 :root{--ink:#17171c;--mut:#6b6b76;--line:#e7e7ea;--acc:#4f46e5;--bg:#f7f7f8}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:1000px;margin:0 auto;padding:32px 20px 80px}
-h1{font-size:25px;letter-spacing:-.02em;margin:0 0 6px}
-.sub{color:var(--mut);margin:0 0 30px}
-section{margin:0 0 38px}
-.ch{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
-.ch h2{font-size:19px;margin:0}
-.dl{font-size:13px;background:var(--acc);color:#fff;padding:7px 14px;border-radius:9px;text-decoration:none;font-weight:560}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:25px;letter-spacing:-.02em;margin:0 0 6px} .sub{color:var(--mut);margin:0 0 30px}
+section{margin:0 0 38px} .ch{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px} .ch h2{font-size:19px;margin:0}
+.dl{font-size:12.5px;background:#eef0fe;color:var(--acc);padding:6px 12px;border-radius:8px;text-decoration:none;font-weight:560}
 .cd{color:var(--mut);margin:0 0 16px;font-size:14px}
-.grid{column-width:280px;column-gap:12px}
-@media(max-width:560px){.grid{column-width:auto;column-count:1}}
-.sk{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;break-inside:avoid;margin-bottom:12px;width:100%}
+.grid{column-width:270px;column-gap:12px}@media(max-width:560px){.grid{column-width:auto;column-count:1}}
+.sk{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;break-inside:avoid;margin-bottom:12px;cursor:pointer;transition:.12s}
+.sk:hover{border-color:var(--acc);transform:translateY(-1px);box-shadow:0 6px 18px rgba(20,20,45,.07)}
 .skh code{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;font-weight:650;color:var(--acc)}
-.skd{font-size:13.5px;color:#30303a;margin:6px 0 8px}
-.tr{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
-.t{font-size:11px;color:#54546a;background:#f2f2f7;border-radius:6px;padding:2px 7px}
-.nf{font-size:11.5px;color:#9a9aa5}
-footer{color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:18px;margin-top:10px}
-footer a{color:var(--acc)}
+.skd{font-size:13px;color:#30303a;margin-top:6px}
+footer{color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:18px;margin-top:10px} footer a{color:var(--acc)}
+.backdrop{position:fixed;inset:0;background:rgba(20,20,35,.42);display:none;align-items:flex-start;justify-content:center;padding:48px 20px;overflow:auto;z-index:40}
+.backdrop.show{display:flex}
+.modal{background:#fff;border-radius:18px;max-width:600px;width:100%;padding:24px 26px;box-shadow:0 24px 60px rgba(20,20,45,.28);position:relative}
+.modal .x{position:absolute;top:14px;right:16px;border:none;background:#f1f1f4;width:30px;height:30px;border-radius:8px;font-size:17px;color:var(--mut);cursor:pointer}
+.m-nm{font-family:ui-monospace,Menlo,monospace;font-size:18px;font-weight:680;color:var(--acc)}
+.m-desc{font-size:14px;color:#2a2a33;margin:10px 0 16px;line-height:1.45}
+.m-sec h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:14px 0 6px;font-weight:640}
+.m-ex{font-size:13.5px;color:#3a3a44;font-style:italic;padding-left:14px;position:relative}
+.m-ex::before{content:"›";position:absolute;left:0;color:var(--acc);font-weight:700;font-style:normal}
+.code{display:flex;gap:8px;align-items:center}
+.code code{flex:1;background:#1e1e26;color:#eee;font-size:11.5px;padding:9px 11px;border-radius:8px;font-family:ui-monospace,Menlo,monospace;overflow-x:auto;white-space:nowrap}
+.cp{border:none;background:var(--acc);color:#fff;font-size:12px;padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:560;white-space:nowrap}
+.m-foot{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}
+.gh{font-size:13px;color:var(--acc);text-decoration:none;font-weight:560} .gh:hover{text-decoration:underline}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(18px);background:var(--ink);color:#fff;font-size:13px;padding:10px 17px;border-radius:10px;opacity:0;pointer-events:none;transition:.22s;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style></head><body><div class="wrap">
 <h1>Skill Collections</h1>
-<p class="sub">Кураторские наборы скиллов <b>Claude Code</b> — читай состав ниже, скачивай zip, распаковывай в <code>~/.claude/</code>.</p>
-<section id="tracker">
-      <div class="ch"><h2>Работа трекера стартап-команд</h2>
-        <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/tracker-v1/tracker-v1.zip">Скачать .zip (13 скиллов)</a></div>
-      <p class="cd">Скиллы для сессий трекинга: подготовка, оркестрация, дебриф, методологии TOC/TRIZ, разбор созвонов в тезисы.</p>
-      <div class="grid"><div class="sk">
-      <div class="skh"><code>/track</code></div>
-      <div class="skd">AI-ассистент трекера стартап-команд: фокус сессий, методологии (TOC/TRIZ), декомпозиция целей, 4 субагента</div>
-      <div class="tr"><span class="t">«track status»</span><span class="t">«track collect»</span><span class="t">«дашборд команды»</span><span class="t">«статус команды»</span><span class="t">«собери материалы»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/track-prep</code></div>
-      <div class="skd">Подготовка к сессии трекинга стартап-команды</div>
-      <div class="tr"><span class="t">«подготовка к сессии»</span><span class="t">«prep»</span><span class="t">«track prep»</span><span class="t">«подготовься к трекингу»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/track-orch</code></div>
-      <div class="skd">Оркестратор трекинга стартап-команд</div>
-      <div class="tr"><span class="t">«контракт сессии»</span><span class="t">«что снимаем сегодня»</span><span class="t">«track orch»</span><span class="t">«трекинг команды»</span><span class="t">«bottleneck session»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/track-debrief</code></div>
-      <div class="skd">Разбор после сессии трекинга стартап-команды</div>
-      <div class="tr"><span class="t">«разбор сессии»</span><span class="t">«debrief»</span><span class="t">«track debrief»</span><span class="t">«итоги трекинга»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-t-challenge</code></div>
-      <div class="skd">Self-challenge трекера — извлечь пары &#x27;вопрос команды → твоя позиция&#x27; из сессии и методически проверить каждую позицию на фальсифицируемость</div>
-      <div class="tr"><span class="t">«вопрос команды → твоя позиция»</span><span class="t">«challenge позиции»</span><span class="t">«проверь мои ответы»</span><span class="t">«self-challenge»</span><span class="t">«опровергни меня»</span><span class="t">«проверь мою диагностику»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-t-svetofor</code></div>
-      <div class="skd">Светофор + спидометр — быстрый чек прогресса команды за трекинговую сессию</div>
-      <div class="tr"><span class="t">«светофор»</span><span class="t">«спидометр»</span><span class="t">«прогресс сессии»</span><span class="t">«traffic light check»</span><span class="t">«session progress check»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-t-jtbd</code></div>
-      <div class="skd">JTBD-анализ интервью по методологии &#x27;Спроси маму&#x27; (Mom Test)</div>
-      <div class="tr"><span class="t">«спроси маму»</span><span class="t">«разбери интервью jtbd»</span><span class="t">«jtbd analysis»</span><span class="t">«mom test»</span><span class="t">«jobs to be done»</span><span class="t">«проанализируй кастдев»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-t-jtbd-fit</code></div>
-      <div class="skd">JTBD Fit Check — проверка product-market fit спеки по Jobs-to-be-Done (Christensen, Ulwick)</div>
-      <div class="tr"><span class="t">«jtbd check»</span><span class="t">«проверка fit»</span><span class="t">«jobs to be done review»</span><span class="t">«попадание в работу пользователя»</span><span class="t">«spec review jtbd»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/thesis-extraction</code></div>
-      <div class="skd">Извлечение ВСЕХ тезисов из транскрипта: кластеризация по темам, граф связей (дерево веток дискуссии), нарратив по каждой ветке</div>
-      <div class="tr"><span class="t">«вытащи тезисы»</span><span class="t">«извлеки тезисы из транскрипта»</span><span class="t">«построй дерево тезисов»</span><span class="t">«граф аргументов»</span><span class="t">«thesis extraction»</span><span class="t">«разложи дискуссию на тезисы»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-w-granola</code></div>
-      <div class="skd">Универсальный анализ встречи из Granola-транскрипта</div>
-      <div class="tr"><span class="t">«разбери granola»</span><span class="t">«granola transcript»</span><span class="t">«обработай транскрипт из granola»</span><span class="t">«granola analysis»</span><span class="t">«встреча из гранолы»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/flyinglogic</code></div>
-      <div class="skd">Генератор диаграмм Flying Logic (нативный формат .xlogic через JSON+генератор) и деревьев ТОС</div>
-      <div class="tr"><span class="t">«флаинглоджик»</span><span class="t">«flyinglogic»</span><span class="t">«flying logic»</span><span class="t">«сделай в flying logic»</span><span class="t">«экспорт в flying logic»</span><span class="t">«.xlogic»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-a-ikr</code></div>
-      <div class="skd">ИКР — Идеальный Конечный Результат (ТРИЗ)</div>
-      <div class="tr"><span class="t">«идеальный результат»</span><span class="t">«триз»</span><span class="t">«противоречие»</span><span class="t">«как решить без компромиссов»</span><span class="t">«ideal final result»</span><span class="t">«triz»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-a-rat</code></div>
-      <div class="skd">Risk Assumption Test — анализ рисков продуктовой идеи по Strategyzer</div>
-      <div class="tr"><span class="t">«проверь допущения»</span><span class="t">«risk assumptions»</span><span class="t">«что должно быть правдой»</span><span class="t">«test assumptions»</span><span class="t">«assumptions mapping»</span></div>
-      
-    </div></div>
-    </section><section id="larp">
-      <div class="ch"><h2>Работа LARP-мастера</h2>
-        <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/larp-v1/larp-v1.zip">Скачать .zip (32 скиллов)</a></div>
-      <p class="cd">Скиллы для разработки и проведения живых ролевых игр: сценарий, сеттинг, персонажи, механики, документация, портреты.</p>
-      <div class="grid"><div class="sk">
-      <div class="skh"><code>/l-g-algo</code></div>
-      <div class="skd">Создание LARP через алгоритмы</div>
-      <div class="tr"><span class="t">«алгоритм создания larp»</span><span class="t">«по методу тананга»</span><span class="t">«по хавской»</span><span class="t">«false paths»</span><span class="t">«partisans method»</span><span class="t">«old house»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-archivist</code></div>
-      <div class="skd">Нежный Архивист — строитель живых миров из лора</div>
-      <div class="tr"><span class="t">«оживи мир»</span><span class="t">«сделай мир глубже»</span><span class="t">«worldbuilding»</span><span class="t">«lore expansion»</span><span class="t">«расширь лор»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-box</code></div>
-      <div class="skd">Упаковка LARP в коробку для проведения без автора</div>
-      <div class="tr"><span class="t">«укоробь игру»</span><span class="t">«game in a box»</span><span class="t">«larp packaging»</span><span class="t">«упакуй игру»</span><span class="t">«коробка для larp»</span><span class="t">«передать игру другому мастеру»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-call</code></div>
-      <div class="skd">Анализ транскриптов созвонов по LARP</div>
-      <div class="tr"><span class="t">«разбери созвон по игре»</span><span class="t">«larp call analysis»</span><span class="t">«конспект встречи мастеров»</span><span class="t">«транскрипт мастерки»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-canon</code></div>
-      <div class="skd">Хранитель Канона — систематизатор лора в source of truth</div>
-      <div class="tr"><span class="t">«систематизируй лор»</span><span class="t">«canon keeper»</span><span class="t">«source of truth»</span><span class="t">«упорядочь канон»</span><span class="t">«проверь лор на противоречия»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-catalog</code></div>
-      <div class="skd">Каталог 365 механик: 185 метатехник LARP + 180 механик настольных игр (BGG)</div>
-      <div class="tr"><span class="t">«какие механики»</span><span class="t">«mechanics catalog»</span><span class="t">«справочник техник»</span><span class="t">«покажи механики»</span><span class="t">«какая техника подходит для...»</span><span class="t">«what technique for...»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-cats</code></div>
-      <div class="skd">CATS Framework для LARP — быстрое выстраивание ожиданий перед игрой</div>
-      <div class="tr"><span class="t">«cats»</span><span class="t">«выстроить ожидания»</span><span class="t">«game expectations»</span><span class="t">«перед началом игры»</span><span class="t">«concept aim tone subject»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-char</code></div>
-      <div class="skd">Создание персонажа для LARP через психологическое интервью</div>
-      <div class="tr"><span class="t">«создай персонажа»</span><span class="t">«загрузка персонажа»</span><span class="t">«character interview»</span><span class="t">«загрузалка»</span><span class="t">«психологический профиль персонажа»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-check</code></div>
-      <div class="skd">Проверка целостности LARP через призму Nordic подхода</div>
-      <div class="tr"><span class="t">«проверь игру»</span><span class="t">«larp check»</span><span class="t">«валидация сценария»</span><span class="t">«целостность larp»</span><span class="t">«готова ли игра»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-check-mechanic</code></div>
-      <div class="skd">Проверка игровой механики на последствия</div>
-      <div class="tr"><span class="t">«проверь механику»</span><span class="t">«что сломается»</span><span class="t">«check mechanic»</span><span class="t">«тест механики»</span><span class="t">«edge cases механики»</span><span class="t">«проверь механику»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-create</code></div>
-      <div class="skd">Помощник по разработке сценариев LARP</div>
-      <div class="tr"><span class="t">«создай игру»</span><span class="t">«сценарий larp»</span><span class="t">«game design larp»</span><span class="t">«придумай ролевую игру»</span><span class="t">«новая larp»</span><span class="t">«сделай сценарий»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-delo</code></div>
-      <div class="skd">Конструктор дела для Кабуки-кабинетки LARP &#x27;Невидимый монах&#x27;. Интервью по 5 блокам → схема дела → полный бриф по канону</div>
-      <div class="tr"><span class="t">«невидимый монах»</span><span class="t">«собери дело»</span><span class="t">«новое дело кабуки»</span><span class="t">«дело для кабинетки»</span><span class="t">«построй дело по мотивам»</span><span class="t">«делокон»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-design</code></div>
-      <div class="skd">Конструктор LARP-игры на базе каталога 159 метатехник из library.lance.ru (47 Nordic + 112 русских)</div>
-      <div class="tr"><span class="t">«создай игру из механик»</span><span class="t">«собери игру из техник»</span><span class="t">«подбери механики для игры»</span><span class="t">«какие техники безопасности взять»</span><span class="t">«хочу игру с блидом»</span><span class="t">«подбери метатехники»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-doc</code></div>
-      <div class="skd">Полная документация LARP по Nordic стандартам</div>
-      <div class="tr"><span class="t">«задокументируй larp»</span><span class="t">«larp documentation»</span><span class="t">«director box»</span><span class="t">«руководство мастера»</span><span class="t">«game flow document»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-dybowski</code></div>
-      <div class="skd">Субагент Дыбовского — провокатор экзистенциальной глубины в геймдизайне</div>
-      <div class="tr"><span class="t">«дыбовский»</span><span class="t">«экзистенциальная глубина»</span><span class="t">«dybowski»</span><span class="t">«provocateur»</span><span class="t">«добавь глубины в игру»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-edit</code></div>
-      <div class="skd">Редактирование прозы и персонажей для LARP/литературы</div>
-      <div class="tr"><span class="t">«отредактируй текст персонажа»</span><span class="t">«prose editing»</span><span class="t">«редактура загруза»</span><span class="t">«улучши персонажа»</span><span class="t">«show don»</span><span class="t">«literary editing»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-extract</code></div>
-      <div class="skd">Извлечение идей из конспектов по геймдизайну</div>
-      <div class="tr"><span class="t">«разбери конспект»</span><span class="t">«извлеки идеи из текста»</span><span class="t">«extract game ideas»</span><span class="t">«конспект по геймдизайну»</span><span class="t">«идеи из лекции»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-funeral-design</code></div>
-      <div class="skd">Дизайн похоронной механики LARP &#x27;Невидимый монах&#x27;</div>
-      <div class="tr"><span class="t">«невидимый монах»</span><span class="t">«дизайн похорон»</span><span class="t">«funeral design»</span><span class="t">«похоронная механика»</span><span class="t">«сцена с мертвецом»</span><span class="t">«этапы похорон»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-interview</code></div>
-      <div class="skd">Интервью с мастером для создания описания LARP</div>
-      <div class="tr"><span class="t">«возьми интервью у мастера»</span><span class="t">«master interview»</span><span class="t">«описание игры»</span><span class="t">«анонс larp»</span><span class="t">«шаблон анонса игры»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-mg</code></div>
-      <div class="skd">Анализ папки Мастерки LARP-проекта</div>
-      <div class="tr"><span class="t">«проанализируй мастерку»</span><span class="t">«разбери мастерскую группу»</span><span class="t">«mg analysis»</span><span class="t">«дерево решений larp»</span><span class="t">«история решений игры»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-midjourney</code></div>
-      <div class="skd">Синтаксис и параметры Midjourney</div>
-      <div class="tr"><span class="t">«промпт для midjourney»</span><span class="t">«mj prompt»</span><span class="t">«midjourney параметры»</span><span class="t">«как написать для миджорни»</span><span class="t">«midjourney syntax»</span><span class="t">«--ar --v --style»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-neurolenoran</code></div>
-      <div class="skd">Нейроленоран — AI-персона режиссёра/продюсера для проекта &#x27;Невидимый монах&#x27; (LARP)</div>
-      <div class="tr"><span class="t">«невидимый монах»</span><span class="t">«леноран»</span><span class="t">«нейроленоран»</span><span class="t">«невидимый монах ревью»</span><span class="t">«проверь сцену»</span><span class="t">«инструктаж сцены»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-nordic</code></div>
-      <div class="skd">Синтезированный скрипт создания Nordic LARP</div>
-      <div class="tr"><span class="t">«nordic larp»</span><span class="t">«скандинавский подход»</span><span class="t">«создай larp по nordic»</span><span class="t">«stenros method»</span><span class="t">«koljonen»</span><span class="t">«bleed-in/bleed-out»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-nri</code></div>
-      <div class="skd">Мастер настольных ролевых игр (НРИ/TTRPG)</div>
-      <div class="tr"><span class="t">«проведи нри»</span><span class="t">«ttrpg session»</span><span class="t">«настольная ролевая»</span><span class="t">«создай приключение»</span><span class="t">«rpg master»</span><span class="t">«кампания»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-portrait</code></div>
-      <div class="skd">Промпт для генерации портретов в Midjourney/DALL-E</div>
-      <div class="tr"><span class="t">«сгенерируй портрет»</span><span class="t">«portrait prompt»</span><span class="t">«промпт для портрета»</span><span class="t">«нарисуй персонажа»</span><span class="t">«character portrait»</span><span class="t">«аватар персонажа»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-scriptdoc</code></div>
-      <div class="skd">Скрипт-доктор интерактивного нарратива</div>
-      <div class="tr"><span class="t">«проверь сценарий»</span><span class="t">«script doctor»</span><span class="t">«структура эпизода»</span><span class="t">«episode structure»</span><span class="t">«story circle»</span><span class="t">«арка эпизода»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-setting</code></div>
-      <div class="skd">10 методик создания сеттинга для LARP и художественных произведений</div>
-      <div class="tr"><span class="t">«придумай мир»</span><span class="t">«создай сеттинг»</span><span class="t">«worldbuilding»</span><span class="t">«мир для игры»</span><span class="t">«setting creation»</span><span class="t">«метод дракона»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-suno</code></div>
-      <div class="skd">Синтаксис и параметры Suno для генерации музыки</div>
-      <div class="tr"><span class="t">«промпт для suno»</span><span class="t">«suno синтаксис»</span><span class="t">«как написать для суно»</span><span class="t">«музыкальный промпт»</span><span class="t">«suno tags»</span><span class="t">«metatags suno»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-syuzhet</code></div>
-      <div class="skd">Пошаговый конструктор сюжета для LARP</div>
-      <div class="tr"><span class="t">«новый сюжет»</span><span class="t">«придумай историю для игры»</span><span class="t">«larp plot»</span><span class="t">«сюжетная линия»</span><span class="t">«narrative design larp»</span><span class="t">«новый сюжет»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-vai</code></div>
-      <div class="skd">Методика от Вая для создания LARP</div>
-      <div class="tr"><span class="t">«по методу вая»</span><span class="t">«vai method»</span><span class="t">«классический подход к larp»</span><span class="t">«базовые принципы larp»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/neurolenoran</code></div>
-      <div class="skd">Нейроленоран — AI-персона продюсера LARP (по образу Андрея Салика). Собирает разрозненные идеи в связный документ, находит дыры, применяет 3 принципа и 5 проверок</div>
-      <div class="tr"><span class="t">«леноран»</span><span class="t">«продюсер larp»</span><span class="t">«neurolenoran»</span><span class="t">«собери идеи в документ»</span><span class="t">«как бы салик сказал»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/playtest-analysis</code></div>
-      <div class="skd">Анализ плейтест-фидбека: CSV -&gt; темы -&gt; дашборд</div>
-      <div class="tr"><span class="t">«проанализируй плейтест»</span><span class="t">«playtest analysis»</span><span class="t">«фидбек плейтеста»</span><span class="t">«отзывы плейтеста»</span><span class="t">«playtest dashboard»</span></div>
-      
-    </div></div>
-    </section><section id="dev">
-      <div class="ch"><h2>Разработка</h2>
-        <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/dev-v1/dev-v1.zip">Скачать .zip (37 скиллов)</a></div>
-      <p class="cd">Скиллы для кодинга: спека (SDD/ITD), архитектура, ревью, MCP/агенты, автоматизация, фронтенд, песочница.</p>
-      <div class="grid"><div class="sk">
-      <div class="skh"><code>/ai-agents-architect</code></div>
-      <div class="skd">Архитектура автономных AI-агентов: tool use, память, планирование, оркестрация</div>
-      <div class="tr"><span class="t">«ai agent architecture»</span><span class="t">«autonomous agent»</span><span class="t">«build agent»</span><span class="t">«tool use design»</span><span class="t">«agent memory»</span><span class="t">«agent planning»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/ai-product</code></div>
-      <div class="skd">Разработка AI-продуктов: LLM-интеграция, RAG, prompt engineering, AI UX, оптимизация костов</div>
-      <div class="tr"><span class="t">«ai product»</span><span class="t">«ai-продукт»</span><span class="t">«rag архитектура»</span><span class="t">«llm в продукте»</span><span class="t">«ai ux»</span><span class="t">«оптимизация токенов»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/ai-wrapper-product</code></div>
-      <div class="skd">Продукты-обёртки над AI API (OpenAI, Anthropic)</div>
-      <div class="tr"><span class="t">«ai wrapper»</span><span class="t">«gpt product»</span><span class="t">«обёртка над api»</span><span class="t">«ai saas»</span><span class="t">«ai tool»</span><span class="t">«chatgpt но для x»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/autonomous-researcher</code></div>
-      <div class="skd">Автономный AI-исследователь с параллельными агентами</div>
-      <div class="tr"><span class="t">«автономное исследование»</span><span class="t">«autonomous research»</span><span class="t">«запусти исследование»</span><span class="t">«параллельный ресёрч»</span><span class="t">«multi-agent research»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/docker-sandbox</code></div>
-      <div class="skd">Запуск Claude Code в Docker Sandbox без подтверждений</div>
-      <div class="tr"><span class="t">«запусти в песочнице»</span><span class="t">«docker sandbox»</span><span class="t">«sandbox mode»</span><span class="t">«автономно напиши код»</span><span class="t">«run in sandbox»</span><span class="t">«безопасный режим разработки»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/frontend-design</code></div>
-      <div class="skd">Выразительные production-grade фронтенд-интерфейсы высокого качества</div>
-      
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-agent-sdk</code></div>
-      <div class="skd">Скаффолд нового проекта на Claude Agent SDK</div>
-      <div class="tr"><span class="t">«создай агента»</span><span class="t">«agent sdk проект»</span><span class="t">«scaffold agent»</span><span class="t">«новый ai-агент»</span><span class="t">«agent-first architecture»</span><span class="t">«mcp tools проект»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-cli</code></div>
-      <div class="skd">Создание composable CLI-инструмента из API docs, OpenAPI, curl, SDK или скрипта</div>
-      <div class="tr"><span class="t">«создай cli»</span><span class="t">«сделай команду»</span><span class="t">«build cli»</span><span class="t">«обёртка над api»</span><span class="t">«cli для сервиса»</span><span class="t">«command-line tool»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-local</code></div>
-      <div class="skd">Запуск Claude Code с локальной моделью через Ollama</div>
-      <div class="tr"><span class="t">«локальная модель»</span><span class="t">«ollama»</span><span class="t">«запусти локально»</span><span class="t">«local model»</span><span class="t">«offline mode»</span><span class="t">«без api»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-vibe-setup</code></div>
-      <div class="skd">Управление сетапом вайб-дизайна JetStyle: статус инструментов, роадмап, scaffold проектов, SOP, CMS-стратегия</div>
-      <div class="tr"><span class="t">«vibe setup»</span><span class="t">«vibe design status»</span><span class="t">«статус вайб-кодинга»</span><span class="t">«роадмап вайб-дизайна»</span><span class="t">«что установлено»</span><span class="t">«vibe coding setup»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-nic</code></div>
-      <div class="skd">NIC Method — структурированная фасилитация проекта (Brief -&gt; Challenge -&gt; Debrief -&gt; Plan -&gt; Spec)</div>
-      <div class="tr"><span class="t">«фасилитация проекта»</span><span class="t">«давай по методу nic»</span><span class="t">«brief challenge debrief»</span><span class="t">«structured facilitation»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-x-frontend</code></div>
-      <div class="skd">Создание выразительных фронтенд-интерфейсов с высоким качеством дизайна</div>
-      <div class="tr"><span class="t">«сделай красивый ui»</span><span class="t">«distinctive frontend»</span><span class="t">«не generic ai слоп»</span><span class="t">«полированный интерфейс»</span><span class="t">«premium web component»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/mcp-builder</code></div>
-      <div class="skd">Создание MCP-серверов (Model Context Protocol)</div>
-      <div class="tr"><span class="t">«mcp server»</span><span class="t">«создай mcp»</span><span class="t">«fastmcp»</span><span class="t">«mcp sdk»</span><span class="t">«интеграция через mcp»</span><span class="t">«mcp tools»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/multi-agent-patterns</code></div>
-      <div class="skd">Паттерны мульти-агентных систем: оркестратор, peer-to-peer, иерархия</div>
-      <div class="tr"><span class="t">«мульти-агент»</span><span class="t">«multi-agent»</span><span class="t">«оркестратор агентов»</span><span class="t">«agent swarm»</span><span class="t">«agent hierarchy»</span><span class="t">«координация агентов»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/n8n-mcp-tools-expert</code></div>
-      <div class="skd">Эксперт по n8n-mcp MCP инструментам</div>
-      <div class="tr"><span class="t">«n8n workflow»</span><span class="t">«n8n mcp»</span><span class="t">«n8n nodes»</span><span class="t">«n8n template»</span><span class="t">«n8n автоматизация»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/owasp-security</code></div>
-      <div class="skd">OWASP security review</div>
-      <div class="tr"><span class="t">«security review»</span><span class="t">«проверь безопасность»</span><span class="t">«owasp check»</span><span class="t">«security audit»</span><span class="t">«уязвимости»</span><span class="t">«vulnerability check»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/port-doctor</code></div>
-      <div class="skd">Управление локальными сервисами и портами</div>
-      <div class="tr"><span class="t">«порты»</span><span class="t">«ports»</span><span class="t">«port doctor»</span><span class="t">«сервис висит»</span><span class="t">«kill port»</span><span class="t">«что занимает порт»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/prompt-engineering-patterns</code></div>
-      <div class="skd">Продвинутые техники prompt engineering для LLM</div>
-      <div class="tr"><span class="t">«оптимизируй промпт»</span><span class="t">«prompt engineering»</span><span class="t">«улучши промпт»</span><span class="t">«промпт для продакшена»</span><span class="t">«chain of thought»</span><span class="t">«few-shot»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/repo-task-proof-loop</code></div>
-      <div class="skd">Верифицируемый цикл разработки для сложных задач: freeze spec → build → evidence → verify (fresh session) → fix. Создаёт .agent/tasks/ с артефактами, ставит субагентов (spec-freezer, builder, verifier, fixer)</div>
-      <div class="tr"><span class="t">«proof loop»</span><span class="t">«верифицируй задачу»</span><span class="t">«запусти proof loop»</span><span class="t">«task with verification»</span><span class="t">«сложная задача с проверкой»</span><span class="t">«freeze spec and verify»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/schema</code></div>
-      <div class="skd">Schema.org разметка и структурированные данные на сайте</div>
-      
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-spec-design</code></div>
-      <div class="skd">Создание технического дизайна для SDD-спецификации</div>
-      <div class="tr"><span class="t">«spec design»</span><span class="t">«технический дизайн спеки»</span><span class="t">«sdd design»</span><span class="t">«архитектура спеки»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-spec-impl</code></div>
-      <div class="skd">Выполнение задач спецификации по TDD-методологии</div>
-      <div class="tr"><span class="t">«implement spec»</span><span class="t">«имплементируй спеку»</span><span class="t">«sdd implement»</span><span class="t">«tdd implementation»</span><span class="t">«code from spec»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-spec-init</code></div>
-      <div class="skd">Инициализация новой SDD-спецификации с описанием проекта</div>
-      <div class="tr"><span class="t">«init spec»</span><span class="t">«создай спецификацию»</span><span class="t">«начни sdd»</span><span class="t">«new specification»</span><span class="t">«sdd init»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-spec-requirements</code></div>
-      <div class="skd">Генерация требований для SDD-спецификации</div>
-      <div class="tr"><span class="t">«spec requirements»</span><span class="t">«требования к спеке»</span><span class="t">«sdd requirements»</span><span class="t">«generate requirements»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-spec-status</code></div>
-      <div class="skd">Статус и прогресс SDD-спецификации</div>
-      <div class="tr"><span class="t">«spec status»</span><span class="t">«прогресс спеки»</span><span class="t">«sdd status»</span><span class="t">«что сделано по спеке»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-spec-tasks</code></div>
-      <div class="skd">Генерация задач имплементации для SDD-спецификации</div>
-      <div class="tr"><span class="t">«spec tasks»</span><span class="t">«задачи по спеке»</span><span class="t">«sdd tasks»</span><span class="t">«implementation plan»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-steering</code></div>
-      <div class="skd">Управление steering-файлами как persistent project knowledge</div>
-      <div class="tr"><span class="t">«steering files»</span><span class="t">«project knowledge»</span><span class="t">«sdd steering»</span><span class="t">«обнови steering»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-validate-design</code></div>
-      <div class="skd">Интерактивная проверка качества технического дизайна</div>
-      <div class="tr"><span class="t">«validate design»</span><span class="t">«проверь дизайн спеки»</span><span class="t">«sdd design review»</span><span class="t">«ревью архитектуры»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-validate-gap</code></div>
-      <div class="skd">Анализ разрыва между требованиями и существующим кодом</div>
-      <div class="tr"><span class="t">«gap analysis»</span><span class="t">«что не реализовано»</span><span class="t">«sdd gap»</span><span class="t">«implementation gap»</span><span class="t">«чего не хватает»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/sdd-validate-impl</code></div>
-      <div class="skd">Валидация имплементации против требований, дизайна и задач</div>
-      <div class="tr"><span class="t">«validate implementation»</span><span class="t">«проверь имплементацию»</span><span class="t">«sdd validate»</span><span class="t">«код соответствует спеке?»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/security-reviewer</code></div>
-      <div class="skd">Security reviewer subagent</div>
-      <div class="tr"><span class="t">«security review code»</span><span class="t">«проверь код на уязвимости»</span><span class="t">«security scan»</span><span class="t">«найди уязвимости в коде»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/senior-review</code></div>
-      <div class="skd">Senior Engineer Review — полный ревью кода с паузами между секциями</div>
-      <div class="tr"><span class="t">«ревью кода»</span><span class="t">«code review»</span><span class="t">«посмотри код»</span><span class="t">«review my changes»</span><span class="t">«проверь что написал»</span><span class="t">«senior review»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/tanenbaum</code></div>
-      <div class="skd">Архитектура распределённых систем по Таненбауму. Используй при задачах об интеграциях между сервисами, событийной/асинхронной архитектуре, репликации, консистентности, отказоустойчивости, consensus, координации процессов</div>
-      <div class="tr"><span class="t">«архитектура микросервисов»</span><span class="t">«передача заказов»</span><span class="t">«обмен между системами»</span><span class="t">«event-driven»</span><span class="t">«eventual consistency»</span><span class="t">«saga»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/telegram-bot-builder</code></div>
-      <div class="skd">Создание Telegram-ботов: от простой автоматизации до AI-ботов</div>
-      <div class="tr"><span class="t">«telegram бот»</span><span class="t">«bot api»</span><span class="t">«tg bot»</span><span class="t">«telegram automation»</span><span class="t">«чат-бот telegram»</span><span class="t">«создай бота»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/telegram-mini-app</code></div>
-      <div class="skd">Создание Telegram Mini Apps (TWA)</div>
-      <div class="tr"><span class="t">«telegram mini app»</span><span class="t">«telegram web app»</span><span class="t">«ton app»</span><span class="t">«мини-приложение telegram»</span><span class="t">«webapp api»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/workflow-automation</code></div>
-      <div class="skd">Автоматизация воркфлоу с кодом: n8n, Temporal, Inngest, durable execution</div>
-      <div class="tr"><span class="t">«workflow automation»</span><span class="t">«durable execution»</span><span class="t">«orchestrator-worker»</span><span class="t">«temporal»</span><span class="t">«inngest»</span><span class="t">«автоматизация процессов»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/zapier-make-patterns</code></div>
-      <div class="skd">No-code автоматизация через Zapier и Make</div>
-      <div class="tr"><span class="t">«zapier»</span><span class="t">«make»</span><span class="t">«integromat»</span><span class="t">«no-code автоматизация»</span><span class="t">«автоматизировать без кода»</span><span class="t">«сценарий make»</span></div>
-      
-    </div></div>
-    </section><section id="design">
-      <div class="ch"><h2>Дизайн</h2>
-        <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/design-v1/design-v1.zip">Скачать .zip (24 скиллов)</a></div>
-      <p class="cd">Скиллы для дизайна и UX: дизайн-системы, UX-аудит, лендинги, Figma, генерация изображений, слайды, стили.</p>
-      <div class="grid"><div class="sk">
-      <div class="skh"><code>/add-style</code></div>
-      <div class="skd">Добавление нового стиля в библиотеку стилей изображений</div>
-      <div class="tr"><span class="t">«добавь стиль»</span><span class="t">«add style»</span><span class="t">«сохрани стиль»</span><span class="t">«новый стиль в библиотеку»</span><span class="t">«запомни этот стиль»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/design-oracle</code></div>
-      <div class="skd">Извлекает дизайн-систему живого сайта по URL через браузер (Playwright): цвета, типографика, spacing, радиусы, компоненты, UX-паттерны, КОМПОЗИЦИЮ (type scale, grid-колонки, выравнивание, ритм секций, паттерны компоновки) и АНИМАЦИИ (CSS transitions с easing, @keyframes, transforms, библиотеки Framer/GSAP/Lenis/AOS, scroll-driven, smooth scroll) → экспорт в DESIGN.md, Tailwind config, React-стабы и JSON-токены</div>
-      <div class="tr"><span class="t">«проанализируй дизайн сайта»</span><span class="t">«извлеки дизайн-систему с сайта»</span><span class="t">«какие цвета и шрифты на этом сайте»</span><span class="t">«какие анимации на сайте»</span><span class="t">«забери анимации с сайта»</span><span class="t">«какая композиция/компоновка»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/frontend-design</code></div>
-      <div class="skd">Выразительные production-grade фронтенд-интерфейсы высокого качества</div>
-      
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-decompose</code></div>
-      <div class="skd">Разрезатор референсов на приёмы — декомпозиция лендинга/сайта на 7 слоёв дизайн-решений</div>
-      <div class="tr"><span class="t">«разбери этот сайт»</span><span class="t">«decompose reference»</span><span class="t">«какие приёмы здесь»</span><span class="t">«разрежь на слои»</span><span class="t">«анализ дизайна сайта»</span><span class="t">«что тут за паттерны»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-design-system</code></div>
-      <div class="skd">Извлечение портативной дизайн-системы из декомпозиции референса</div>
-      <div class="tr"><span class="t">«сделай дизайн-систему»</span><span class="t">«extract design system»</span><span class="t">«design tokens»</span><span class="t">«css токены из референса»</span><span class="t">«переиспользуемые стили»</span><span class="t">«design.md»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-ds-codify</code></div>
-      <div class="skd">Кодификация дизайн-системы проекта: аудит CSS, создание токенов, LLM-readable спеки, скрипт аудита, замена hardcoded значений</div>
-      <div class="tr"><span class="t">«кодифицируй дизайн-систему»</span><span class="t">«аудит css токенов»</span><span class="t">«сделай токены из css»</span><span class="t">«design system audit»</span><span class="t">«codify design system»</span><span class="t">«make ds llm-readable»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-enhance</code></div>
-      <div class="skd">Апскейл изображений через AuraSR v2 (4x, GAN, локально на MPS)</div>
-      <div class="tr"><span class="t">«увеличь картинку»</span><span class="t">«upscale»</span><span class="t">«апскейл»</span><span class="t">«enhance image»</span><span class="t">«увеличь разрешение»</span><span class="t">«сделай картинку больше»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-figma</code></div>
-      <div class="skd">Figma &lt;-&gt; Code раундтрип</div>
-      <div class="tr"><span class="t">«сверстай из figma»</span><span class="t">«figma to code»</span><span class="t">«figma to html»</span><span class="t">«перенеси дизайн в код»</span><span class="t">«сделай из макета»</span><span class="t">«from figma»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-img-edit</code></div>
-      <div class="skd">Редактор картинок с контролем композиции</div>
-      
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-landing</code></div>
-      <div class="skd">Методика структуры и копирайтинга лендинга (StoryBrand, PAS, AIDA)</div>
-      <div class="tr"><span class="t">«напиши текст лендинга»</span><span class="t">«структура лендинга»</span><span class="t">«landing copy»</span><span class="t">«конверсионный текст»</span><span class="t">«секции лендинга»</span><span class="t">«hero section»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-slides</code></div>
-      <div class="skd">Генератор HTML-презентаций из markdown</div>
-      <div class="tr"><span class="t">«сделай слайды»</span><span class="t">«create slides»</span><span class="t">«html presentation»</span><span class="t">«l-d-slides»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-d-vibe-landing</code></div>
-      <div class="skd">Вайб-кодинг лендингов по референсу</div>
-      <div class="tr"><span class="t">«сделай лендинг как у x»</span><span class="t">«лендинг по референсу»</span><span class="t">«vibe landing»</span><span class="t">«скопируй стиль сайта»</span><span class="t">«сверстай как этот сайт»</span><span class="t">«landing like this»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-g-portrait</code></div>
-      <div class="skd">Промпт для генерации портретов в Midjourney/DALL-E</div>
-      <div class="tr"><span class="t">«сгенерируй портрет»</span><span class="t">«portrait prompt»</span><span class="t">«промпт для портрета»</span><span class="t">«нарисуй персонажа»</span><span class="t">«character portrait»</span><span class="t">«аватар персонажа»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-s-slide-check</code></div>
-      <div class="skd">Проверка композиции HTML-презентации</div>
-      <div class="tr"><span class="t">«проверь слайды»</span><span class="t">«check slides»</span><span class="t">«композиция слайдов»</span><span class="t">«slide review»</span><span class="t">«аудит презентации»</span><span class="t">«проверь типографику слайдов»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/l-s-slide-fit</code></div>
-      <div class="skd">Подгонка контента под слайды до генерации HTML</div>
-      <div class="tr"><span class="t">«подгони контент»</span><span class="t">«slide fit»</span><span class="t">«влезет ли на слайд»</span><span class="t">«content density»</span><span class="t">«проверь плотность слайдов»</span><span class="t">«fit content to slides»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/map-maker</code></div>
-      <div class="skd">Генератор карт вымышленного мира. World-as-data: YAML источник истины + nano-banana растровый рендеринг + pycairo векторный рендеринг</div>
-      
-      
-    </div><div class="sk">
-      <div class="skh"><code>/nanobanana</code></div>
-      <div class="skd">Генерация изображений через Gemini API</div>
-      <div class="tr"><span class="t">«дорисуй»</span><span class="t">«измени фон»</span><span class="t">«добавь деталь»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/page-cro</code></div>
-      <div class="skd">Оптимизация конверсии страниц (CRO)</div>
-      <div class="tr"><span class="t">«конверсия страницы»</span><span class="t">«почему страница не конвертит»</span><span class="t">«improve conversion rate»</span><span class="t">«оптимизация лендинга»</span><span class="t">«a/b тест»</span><span class="t">«underperforming page»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/prd-review</code></div>
-      <div class="skd">Ревью PRD документа по чеклисту качества</div>
-      <div class="tr"><span class="t">«проверь prd»</span><span class="t">«prd review»</span><span class="t">«ревью спецификации»</span><span class="t">«review requirements»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/site-architecture</code></div>
-      <div class="skd">Иерархия страниц сайта, навигация, URL-структура, внутренняя перелинковка</div>
-      
-      
-    </div><div class="sk">
-      <div class="skh"><code>/style-profile</code></div>
-      <div class="skd">ОСНОВНОЙ скилл для клонирования визуального стиля. Извлекает JSON brand-style-profile из 1–N изображений или со страниц сайта — чтобы AI мог сгенерировать НОВЫЙ контент в том же стиле для любой темы</div>
-      <div class="tr"><span class="t">«клонировать стиль»</span><span class="t">«clone style»</span><span class="t">«повтори стиль»</span><span class="t">«сделай в этом стиле»</span><span class="t">«in this style»</span><span class="t">«возьми стиль с»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/ui-ux-pro-max</code></div>
-      <div class="skd">Дизайн-система и UX-справочник для веба и мобайла</div>
-      <div class="tr"><span class="t">«дизайн-система»</span><span class="t">«design system»</span><span class="t">«подбери палитру»</span><span class="t">«color palette»</span><span class="t">«подбери шрифты»</span><span class="t">«font pairing»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/ux-audit-rethink</code></div>
-      <div class="skd">Комплексный UX-аудит по 7 факторам IxDF, 5 характеристикам юзабилити, 5 измерениям взаимодействия, 12 Laws of UX (Hick&#x27;s, Fitts&#x27;s, Miller&#x27;s, Jakob&#x27;s, Doherty, Peak-End, Von Restorff, Serial Position, Aesthetic-Usability, Tesler&#x27;s, Postel&#x27;s, Zeigarnik), Gestalt-принципам, и Liz Lerman Critical Response Process. С severity scoring</div>
-      <div class="tr"><span class="t">«s, fitts»</span><span class="t">«s, jakob»</span><span class="t">«s, postel»</span><span class="t">«ux audit»</span><span class="t">«ux аудит»</span><span class="t">«проверь юзабилити»</span></div>
-      
-    </div><div class="sk">
-      <div class="skh"><code>/ux-scenario-redesign</code></div>
-      <div class="skd">UX+UI редизайн под целевой сценарий</div>
-      <div class="tr"><span class="t">«редизайн по сценарию»</span><span class="t">«scenario redesign»</span><span class="t">«переделай ui под задачу»</span><span class="t">«ux redesign»</span><span class="t">«упрости интерфейс для»</span></div>
-      
-    </div></div>
-    </section>
-<footer>Источник: <a href="https://github.com/kulakov/skill-collections">github.com/kulakov/skill-collections</a> · скиллы в формате SKILL.md, работают в Claude Code, Codex, Cursor и др.</footer>
-</div></body></html>
+<p class="sub">Кураторские наборы скиллов <b>Claude Code</b>. Клик по скиллу — описание, пример и установка одной командой.</p>
+<section id="tracker"><div class="ch"><h2>Работа трекера стартап-команд</h2>
+      <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/tracker-v1/tracker-v1.zip">Скачать всё .zip (13)</a></div>
+      <p class="cd">Скиллы для сессий трекинга: подготовка, оркестрация, дебриф, методологии TOC/TRIZ, разбор созвонов в тезисы.</p><div class="grid"><div class="sk" data-id="tracker/track"><div class="skh"><code>/track</code></div><div class="skd">AI-ассистент трекера стартап-команд: фокус сессий, методологии (TOC/TRIZ), декомпозиция целей, 4 суб</div></div><div class="sk" data-id="tracker/track-prep"><div class="skh"><code>/track-prep</code></div><div class="skd">Подготовка к сессии трекинга стартап-команды</div></div><div class="sk" data-id="tracker/track-orch"><div class="skh"><code>/track-orch</code></div><div class="skd">Оркестратор трекинга стартап-команд</div></div><div class="sk" data-id="tracker/track-debrief"><div class="skh"><code>/track-debrief</code></div><div class="skd">Разбор после сессии трекинга стартап-команды</div></div><div class="sk" data-id="tracker/l-t-challenge"><div class="skh"><code>/l-t-challenge</code></div><div class="skd">Self-challenge трекера — извлечь пары &#x27;вопрос команды → твоя позиция&#x27; из сессии и методически провер</div></div><div class="sk" data-id="tracker/l-t-svetofor"><div class="skh"><code>/l-t-svetofor</code></div><div class="skd">Светофор + спидометр — быстрый чек прогресса команды за трекинговую сессию</div></div><div class="sk" data-id="tracker/l-t-jtbd"><div class="skh"><code>/l-t-jtbd</code></div><div class="skd">JTBD-анализ интервью по методологии &#x27;Спроси маму&#x27; (Mom Test)</div></div><div class="sk" data-id="tracker/l-t-jtbd-fit"><div class="skh"><code>/l-t-jtbd-fit</code></div><div class="skd">JTBD Fit Check — проверка product-market fit спеки по Jobs-to-be-Done (Christensen, Ulwick)</div></div><div class="sk" data-id="tracker/thesis-extraction"><div class="skh"><code>/thesis-extraction</code></div><div class="skd">Извлечение ВСЕХ тезисов из транскрипта: кластеризация по темам, граф связей (дерево веток дискуссии)</div></div><div class="sk" data-id="tracker/l-w-granola"><div class="skh"><code>/l-w-granola</code></div><div class="skd">Универсальный анализ встречи из Granola-транскрипта</div></div><div class="sk" data-id="tracker/flyinglogic"><div class="skh"><code>/flyinglogic</code></div><div class="skd">Генератор диаграмм Flying Logic (нативный формат .xlogic через JSON+генератор) и деревьев ТОС</div></div><div class="sk" data-id="tracker/l-a-ikr"><div class="skh"><code>/l-a-ikr</code></div><div class="skd">ИКР — Идеальный Конечный Результат (ТРИЗ)</div></div><div class="sk" data-id="tracker/l-a-rat"><div class="skh"><code>/l-a-rat</code></div><div class="skd">Risk Assumption Test — анализ рисков продуктовой идеи по Strategyzer</div></div></div></section><section id="larp"><div class="ch"><h2>Работа LARP-мастера</h2>
+      <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/larp-v1/larp-v1.zip">Скачать всё .zip (32)</a></div>
+      <p class="cd">Скиллы для разработки и проведения живых ролевых игр: сценарий, сеттинг, персонажи, механики, документация, портреты.</p><div class="grid"><div class="sk" data-id="larp/l-g-algo"><div class="skh"><code>/l-g-algo</code></div><div class="skd">Создание LARP через алгоритмы</div></div><div class="sk" data-id="larp/l-g-archivist"><div class="skh"><code>/l-g-archivist</code></div><div class="skd">Нежный Архивист — строитель живых миров из лора</div></div><div class="sk" data-id="larp/l-g-box"><div class="skh"><code>/l-g-box</code></div><div class="skd">Упаковка LARP в коробку для проведения без автора</div></div><div class="sk" data-id="larp/l-g-call"><div class="skh"><code>/l-g-call</code></div><div class="skd">Анализ транскриптов созвонов по LARP</div></div><div class="sk" data-id="larp/l-g-canon"><div class="skh"><code>/l-g-canon</code></div><div class="skd">Хранитель Канона — систематизатор лора в source of truth</div></div><div class="sk" data-id="larp/l-g-catalog"><div class="skh"><code>/l-g-catalog</code></div><div class="skd">Каталог 365 механик: 185 метатехник LARP + 180 механик настольных игр (BGG)</div></div><div class="sk" data-id="larp/l-g-cats"><div class="skh"><code>/l-g-cats</code></div><div class="skd">CATS Framework для LARP — быстрое выстраивание ожиданий перед игрой</div></div><div class="sk" data-id="larp/l-g-char"><div class="skh"><code>/l-g-char</code></div><div class="skd">Создание персонажа для LARP через психологическое интервью</div></div><div class="sk" data-id="larp/l-g-check"><div class="skh"><code>/l-g-check</code></div><div class="skd">Проверка целостности LARP через призму Nordic подхода</div></div><div class="sk" data-id="larp/l-g-check-mechanic"><div class="skh"><code>/l-g-check-mechanic</code></div><div class="skd">Проверка игровой механики на последствия</div></div><div class="sk" data-id="larp/l-g-create"><div class="skh"><code>/l-g-create</code></div><div class="skd">Помощник по разработке сценариев LARP</div></div><div class="sk" data-id="larp/l-g-delo"><div class="skh"><code>/l-g-delo</code></div><div class="skd">Конструктор дела для Кабуки-кабинетки LARP &#x27;Невидимый монах&#x27;. Интервью по 5 блокам → схема дела → по</div></div><div class="sk" data-id="larp/l-g-design"><div class="skh"><code>/l-g-design</code></div><div class="skd">Конструктор LARP-игры на базе каталога 159 метатехник из library.lance.ru (47 Nordic + 112 русских)</div></div><div class="sk" data-id="larp/l-g-doc"><div class="skh"><code>/l-g-doc</code></div><div class="skd">Полная документация LARP по Nordic стандартам</div></div><div class="sk" data-id="larp/l-g-dybowski"><div class="skh"><code>/l-g-dybowski</code></div><div class="skd">Субагент Дыбовского — провокатор экзистенциальной глубины в геймдизайне</div></div><div class="sk" data-id="larp/l-g-edit"><div class="skh"><code>/l-g-edit</code></div><div class="skd">Редактирование прозы и персонажей для LARP/литературы</div></div><div class="sk" data-id="larp/l-g-extract"><div class="skh"><code>/l-g-extract</code></div><div class="skd">Извлечение идей из конспектов по геймдизайну</div></div><div class="sk" data-id="larp/l-g-funeral-design"><div class="skh"><code>/l-g-funeral-design</code></div><div class="skd">Дизайн похоронной механики LARP &#x27;Невидимый монах&#x27;</div></div><div class="sk" data-id="larp/l-g-interview"><div class="skh"><code>/l-g-interview</code></div><div class="skd">Интервью с мастером для создания описания LARP</div></div><div class="sk" data-id="larp/l-g-mg"><div class="skh"><code>/l-g-mg</code></div><div class="skd">Анализ папки Мастерки LARP-проекта</div></div><div class="sk" data-id="larp/l-g-midjourney"><div class="skh"><code>/l-g-midjourney</code></div><div class="skd">Синтаксис и параметры Midjourney</div></div><div class="sk" data-id="larp/l-g-neurolenoran"><div class="skh"><code>/l-g-neurolenoran</code></div><div class="skd">Нейроленоран — AI-персона режиссёра/продюсера для проекта &#x27;Невидимый монах&#x27; (LARP)</div></div><div class="sk" data-id="larp/l-g-nordic"><div class="skh"><code>/l-g-nordic</code></div><div class="skd">Синтезированный скрипт создания Nordic LARP</div></div><div class="sk" data-id="larp/l-g-nri"><div class="skh"><code>/l-g-nri</code></div><div class="skd">Мастер настольных ролевых игр (НРИ/TTRPG)</div></div><div class="sk" data-id="larp/l-g-portrait"><div class="skh"><code>/l-g-portrait</code></div><div class="skd">Промпт для генерации портретов в Midjourney/DALL-E</div></div><div class="sk" data-id="larp/l-g-scriptdoc"><div class="skh"><code>/l-g-scriptdoc</code></div><div class="skd">Скрипт-доктор интерактивного нарратива</div></div><div class="sk" data-id="larp/l-g-setting"><div class="skh"><code>/l-g-setting</code></div><div class="skd">10 методик создания сеттинга для LARP и художественных произведений</div></div><div class="sk" data-id="larp/l-g-suno"><div class="skh"><code>/l-g-suno</code></div><div class="skd">Синтаксис и параметры Suno для генерации музыки</div></div><div class="sk" data-id="larp/l-g-syuzhet"><div class="skh"><code>/l-g-syuzhet</code></div><div class="skd">Пошаговый конструктор сюжета для LARP</div></div><div class="sk" data-id="larp/l-g-vai"><div class="skh"><code>/l-g-vai</code></div><div class="skd">Методика от Вая для создания LARP</div></div><div class="sk" data-id="larp/neurolenoran"><div class="skh"><code>/neurolenoran</code></div><div class="skd">Нейроленоран — AI-персона продюсера LARP (по образу Андрея Салика). Собирает разрозненные идеи в свя</div></div><div class="sk" data-id="larp/playtest-analysis"><div class="skh"><code>/playtest-analysis</code></div><div class="skd">Анализ плейтест-фидбека: CSV -&gt; темы -&gt; дашборд</div></div></div></section><section id="dev"><div class="ch"><h2>Разработка</h2>
+      <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/dev-v1/dev-v1.zip">Скачать всё .zip (37)</a></div>
+      <p class="cd">Скиллы для кодинга: спека (SDD/ITD), архитектура, ревью, MCP/агенты, автоматизация, фронтенд, песочница.</p><div class="grid"><div class="sk" data-id="dev/ai-agents-architect"><div class="skh"><code>/ai-agents-architect</code></div><div class="skd">Архитектура автономных AI-агентов: tool use, память, планирование, оркестрация</div></div><div class="sk" data-id="dev/ai-product"><div class="skh"><code>/ai-product</code></div><div class="skd">Разработка AI-продуктов: LLM-интеграция, RAG, prompt engineering, AI UX, оптимизация костов</div></div><div class="sk" data-id="dev/ai-wrapper-product"><div class="skh"><code>/ai-wrapper-product</code></div><div class="skd">Продукты-обёртки над AI API (OpenAI, Anthropic)</div></div><div class="sk" data-id="dev/autonomous-researcher"><div class="skh"><code>/autonomous-researcher</code></div><div class="skd">Автономный AI-исследователь с параллельными агентами</div></div><div class="sk" data-id="dev/docker-sandbox"><div class="skh"><code>/docker-sandbox</code></div><div class="skd">Запуск Claude Code в Docker Sandbox без подтверждений</div></div><div class="sk" data-id="dev/frontend-design"><div class="skh"><code>/frontend-design</code></div><div class="skd">Выразительные production-grade фронтенд-интерфейсы высокого качества</div></div><div class="sk" data-id="dev/l-d-agent-sdk"><div class="skh"><code>/l-d-agent-sdk</code></div><div class="skd">Скаффолд нового проекта на Claude Agent SDK</div></div><div class="sk" data-id="dev/l-d-cli"><div class="skh"><code>/l-d-cli</code></div><div class="skd">Создание composable CLI-инструмента из API docs, OpenAPI, curl, SDK или скрипта</div></div><div class="sk" data-id="dev/l-d-local"><div class="skh"><code>/l-d-local</code></div><div class="skd">Запуск Claude Code с локальной моделью через Ollama</div></div><div class="sk" data-id="dev/l-d-vibe-setup"><div class="skh"><code>/l-d-vibe-setup</code></div><div class="skd">Управление сетапом вайб-дизайна JetStyle: статус инструментов, роадмап, scaffold проектов, SOP, CMS-</div></div><div class="sk" data-id="dev/l-nic"><div class="skh"><code>/l-nic</code></div><div class="skd">NIC Method — структурированная фасилитация проекта (Brief -&gt; Challenge -&gt; Debrief -&gt; Plan -&gt; Spec)</div></div><div class="sk" data-id="dev/l-x-frontend"><div class="skh"><code>/l-x-frontend</code></div><div class="skd">Создание выразительных фронтенд-интерфейсов с высоким качеством дизайна</div></div><div class="sk" data-id="dev/mcp-builder"><div class="skh"><code>/mcp-builder</code></div><div class="skd">Создание MCP-серверов (Model Context Protocol)</div></div><div class="sk" data-id="dev/multi-agent-patterns"><div class="skh"><code>/multi-agent-patterns</code></div><div class="skd">Паттерны мульти-агентных систем: оркестратор, peer-to-peer, иерархия</div></div><div class="sk" data-id="dev/n8n-mcp-tools-expert"><div class="skh"><code>/n8n-mcp-tools-expert</code></div><div class="skd">Эксперт по n8n-mcp MCP инструментам</div></div><div class="sk" data-id="dev/owasp-security"><div class="skh"><code>/owasp-security</code></div><div class="skd">OWASP security review</div></div><div class="sk" data-id="dev/port-doctor"><div class="skh"><code>/port-doctor</code></div><div class="skd">Управление локальными сервисами и портами</div></div><div class="sk" data-id="dev/prompt-engineering-patterns"><div class="skh"><code>/prompt-engineering-patterns</code></div><div class="skd">Продвинутые техники prompt engineering для LLM</div></div><div class="sk" data-id="dev/repo-task-proof-loop"><div class="skh"><code>/repo-task-proof-loop</code></div><div class="skd">Верифицируемый цикл разработки для сложных задач: freeze spec → build → evidence → verify (fresh ses</div></div><div class="sk" data-id="dev/schema"><div class="skh"><code>/schema</code></div><div class="skd">Schema.org разметка и структурированные данные на сайте</div></div><div class="sk" data-id="dev/sdd-spec-design"><div class="skh"><code>/sdd-spec-design</code></div><div class="skd">Создание технического дизайна для SDD-спецификации</div></div><div class="sk" data-id="dev/sdd-spec-impl"><div class="skh"><code>/sdd-spec-impl</code></div><div class="skd">Выполнение задач спецификации по TDD-методологии</div></div><div class="sk" data-id="dev/sdd-spec-init"><div class="skh"><code>/sdd-spec-init</code></div><div class="skd">Инициализация новой SDD-спецификации с описанием проекта</div></div><div class="sk" data-id="dev/sdd-spec-requirements"><div class="skh"><code>/sdd-spec-requirements</code></div><div class="skd">Генерация требований для SDD-спецификации</div></div><div class="sk" data-id="dev/sdd-spec-status"><div class="skh"><code>/sdd-spec-status</code></div><div class="skd">Статус и прогресс SDD-спецификации</div></div><div class="sk" data-id="dev/sdd-spec-tasks"><div class="skh"><code>/sdd-spec-tasks</code></div><div class="skd">Генерация задач имплементации для SDD-спецификации</div></div><div class="sk" data-id="dev/sdd-steering"><div class="skh"><code>/sdd-steering</code></div><div class="skd">Управление steering-файлами как persistent project knowledge</div></div><div class="sk" data-id="dev/sdd-validate-design"><div class="skh"><code>/sdd-validate-design</code></div><div class="skd">Интерактивная проверка качества технического дизайна</div></div><div class="sk" data-id="dev/sdd-validate-gap"><div class="skh"><code>/sdd-validate-gap</code></div><div class="skd">Анализ разрыва между требованиями и существующим кодом</div></div><div class="sk" data-id="dev/sdd-validate-impl"><div class="skh"><code>/sdd-validate-impl</code></div><div class="skd">Валидация имплементации против требований, дизайна и задач</div></div><div class="sk" data-id="dev/security-reviewer"><div class="skh"><code>/security-reviewer</code></div><div class="skd">Security reviewer subagent</div></div><div class="sk" data-id="dev/senior-review"><div class="skh"><code>/senior-review</code></div><div class="skd">Senior Engineer Review — полный ревью кода с паузами между секциями</div></div><div class="sk" data-id="dev/tanenbaum"><div class="skh"><code>/tanenbaum</code></div><div class="skd">Архитектура распределённых систем по Таненбауму. Используй при задачах об интеграциях между сервисам</div></div><div class="sk" data-id="dev/telegram-bot-builder"><div class="skh"><code>/telegram-bot-builder</code></div><div class="skd">Создание Telegram-ботов: от простой автоматизации до AI-ботов</div></div><div class="sk" data-id="dev/telegram-mini-app"><div class="skh"><code>/telegram-mini-app</code></div><div class="skd">Создание Telegram Mini Apps (TWA)</div></div><div class="sk" data-id="dev/workflow-automation"><div class="skh"><code>/workflow-automation</code></div><div class="skd">Автоматизация воркфлоу с кодом: n8n, Temporal, Inngest, durable execution</div></div><div class="sk" data-id="dev/zapier-make-patterns"><div class="skh"><code>/zapier-make-patterns</code></div><div class="skd">No-code автоматизация через Zapier и Make</div></div></div></section><section id="design"><div class="ch"><h2>Дизайн</h2>
+      <a class="dl" href="https://github.com/kulakov/skill-collections/releases/download/design-v1/design-v1.zip">Скачать всё .zip (24)</a></div>
+      <p class="cd">Скиллы для дизайна и UX: дизайн-системы, UX-аудит, лендинги, Figma, генерация изображений, слайды, стили.</p><div class="grid"><div class="sk" data-id="design/add-style"><div class="skh"><code>/add-style</code></div><div class="skd">Добавление нового стиля в библиотеку стилей изображений</div></div><div class="sk" data-id="design/design-oracle"><div class="skh"><code>/design-oracle</code></div><div class="skd">Извлекает дизайн-систему живого сайта по URL через браузер (Playwright): цвета, типографика, spacing</div></div><div class="sk" data-id="design/frontend-design"><div class="skh"><code>/frontend-design</code></div><div class="skd">Выразительные production-grade фронтенд-интерфейсы высокого качества</div></div><div class="sk" data-id="design/l-d-decompose"><div class="skh"><code>/l-d-decompose</code></div><div class="skd">Разрезатор референсов на приёмы — декомпозиция лендинга/сайта на 7 слоёв дизайн-решений</div></div><div class="sk" data-id="design/l-d-design-system"><div class="skh"><code>/l-d-design-system</code></div><div class="skd">Извлечение портативной дизайн-системы из декомпозиции референса</div></div><div class="sk" data-id="design/l-d-ds-codify"><div class="skh"><code>/l-d-ds-codify</code></div><div class="skd">Кодификация дизайн-системы проекта: аудит CSS, создание токенов, LLM-readable спеки, скрипт аудита, </div></div><div class="sk" data-id="design/l-d-enhance"><div class="skh"><code>/l-d-enhance</code></div><div class="skd">Апскейл изображений через AuraSR v2 (4x, GAN, локально на MPS)</div></div><div class="sk" data-id="design/l-d-figma"><div class="skh"><code>/l-d-figma</code></div><div class="skd">Figma &lt;-&gt; Code раундтрип</div></div><div class="sk" data-id="design/l-d-img-edit"><div class="skh"><code>/l-d-img-edit</code></div><div class="skd">Редактор картинок с контролем композиции</div></div><div class="sk" data-id="design/l-d-landing"><div class="skh"><code>/l-d-landing</code></div><div class="skd">Методика структуры и копирайтинга лендинга (StoryBrand, PAS, AIDA)</div></div><div class="sk" data-id="design/l-d-slides"><div class="skh"><code>/l-d-slides</code></div><div class="skd">Генератор HTML-презентаций из markdown</div></div><div class="sk" data-id="design/l-d-vibe-landing"><div class="skh"><code>/l-d-vibe-landing</code></div><div class="skd">Вайб-кодинг лендингов по референсу</div></div><div class="sk" data-id="design/l-g-portrait"><div class="skh"><code>/l-g-portrait</code></div><div class="skd">Промпт для генерации портретов в Midjourney/DALL-E</div></div><div class="sk" data-id="design/l-s-slide-check"><div class="skh"><code>/l-s-slide-check</code></div><div class="skd">Проверка композиции HTML-презентации</div></div><div class="sk" data-id="design/l-s-slide-fit"><div class="skh"><code>/l-s-slide-fit</code></div><div class="skd">Подгонка контента под слайды до генерации HTML</div></div><div class="sk" data-id="design/map-maker"><div class="skh"><code>/map-maker</code></div><div class="skd">Генератор карт вымышленного мира. World-as-data: YAML источник истины + nano-banana растровый рендер</div></div><div class="sk" data-id="design/nanobanana"><div class="skh"><code>/nanobanana</code></div><div class="skd">Генерация изображений через Gemini API</div></div><div class="sk" data-id="design/page-cro"><div class="skh"><code>/page-cro</code></div><div class="skd">Оптимизация конверсии страниц (CRO)</div></div><div class="sk" data-id="design/prd-review"><div class="skh"><code>/prd-review</code></div><div class="skd">Ревью PRD документа по чеклисту качества</div></div><div class="sk" data-id="design/site-architecture"><div class="skh"><code>/site-architecture</code></div><div class="skd">Иерархия страниц сайта, навигация, URL-структура, внутренняя перелинковка</div></div><div class="sk" data-id="design/style-profile"><div class="skh"><code>/style-profile</code></div><div class="skd">ОСНОВНОЙ скилл для клонирования визуального стиля. Извлекает JSON brand-style-profile из 1–N изображ</div></div><div class="sk" data-id="design/ui-ux-pro-max"><div class="skh"><code>/ui-ux-pro-max</code></div><div class="skd">Дизайн-система и UX-справочник для веба и мобайла</div></div><div class="sk" data-id="design/ux-audit-rethink"><div class="skh"><code>/ux-audit-rethink</code></div><div class="skd">Комплексный UX-аудит по 7 факторам IxDF, 5 характеристикам юзабилити, 5 измерениям взаимодействия, 1</div></div><div class="sk" data-id="design/ux-scenario-redesign"><div class="skh"><code>/ux-scenario-redesign</code></div><div class="skd">UX+UI редизайн под целевой сценарий</div></div></div></section>
+<footer>Источник: <a href="https://github.com/kulakov/skill-collections">github.com/kulakov/skill-collections</a> · формат SKILL.md, работает в Claude Code, Codex, Cursor и др.</footer>
+</div>
+<div class="backdrop" id="bd"><div class="modal" id="md"></div></div>
+<div class="toast" id="toast"></div>
+<script id="d" type="application/json">{"tracker/track": {"name": "track", "desc": "AI-ассистент трекера стартап-команд: фокус сессий, методологии (TOC/TRIZ), декомпозиция целей, 4 субагента", "example": "Покажи дашборд статуса команды разработки приложения", "git": "https://github.com/kulakov/skill-collections/tree/master/tracker/skills/track", "install": "npx degit kulakov/skill-collections/tracker/skills/track ~/.claude/skills/track", "isdir": true}, "tracker/track-prep": {"name": "track-prep", "desc": "Подготовка к сессии трекинга стартап-команды", "example": "Подготовь меня к сессии трекинга с командой из трёх человек", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/track-prep.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/track-prep.md -o ~/.claude/commands/track-prep.md", "isdir": false}, "tracker/track-orch": {"name": "track-orch", "desc": "Оркестратор трекинга стартап-команд", "example": "Составь контракт сессии трекинга для стартапа из трёх человек", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/track-orch.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/track-orch.md -o ~/.claude/commands/track-orch.md", "isdir": false}, "tracker/track-debrief": {"name": "track-debrief", "desc": "Разбор после сессии трекинга стартап-команды", "example": "Разбери итоги трекинг-сессии с командой стартапа", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/track-debrief.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/track-debrief.md -o ~/.claude/commands/track-debrief.md", "isdir": false}, "tracker/l-t-challenge": {"name": "l-t-challenge", "desc": "Self-challenge трекера — извлечь пары 'вопрос команды → твоя позиция' из сессии и методически проверить каждую позицию на фальсифицируемость", "example": "Опровергни мои позиции после сессии с командой", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/l-t-challenge.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/l-t-challenge.md -o ~/.claude/commands/l-t-challenge.md", "isdir": false}, "tracker/l-t-svetofor": {"name": "l-t-svetofor", "desc": "Светофор + спидометр — быстрый чек прогресса команды за трекинговую сессию", "example": "Быстрый светофор прогресса команды за эту сессию трекинга", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/l-t-svetofor.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/l-t-svetofor.md -o ~/.claude/commands/l-t-svetofor.md", "isdir": false}, "tracker/l-t-jtbd": {"name": "l-t-jtbd", "desc": "JTBD-анализ интервью по методологии 'Спроси маму' (Mom Test)", "example": "Разбери интервью с клиентом по методу Mom Test", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/l-t-jtbd.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/l-t-jtbd.md -o ~/.claude/commands/l-t-jtbd.md", "isdir": false}, "tracker/l-t-jtbd-fit": {"name": "l-t-jtbd-fit", "desc": "JTBD Fit Check — проверка product-market fit спеки по Jobs-to-be-Done (Christensen, Ulwick)", "example": "Проверь спеку фичи на попадание в работу пользователя", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/l-t-jtbd-fit.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/l-t-jtbd-fit.md -o ~/.claude/commands/l-t-jtbd-fit.md", "isdir": false}, "tracker/thesis-extraction": {"name": "thesis-extraction", "desc": "Извлечение ВСЕХ тезисов из транскрипта: кластеризация по темам, граф связей (дерево веток дискуссии), нарратив по каждой ветке", "example": "Вытащи все тезисы из транскрипта планёрки и построй дерево", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/thesis-extraction.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/thesis-extraction.md -o ~/.claude/commands/thesis-extraction.md", "isdir": false}, "tracker/l-w-granola": {"name": "l-w-granola", "desc": "Универсальный анализ встречи из Granola-транскрипта", "example": "Разбери транскрипт встречи из Granola с инвестором", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/l-w-granola.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/l-w-granola.md -o ~/.claude/commands/l-w-granola.md", "isdir": false}, "tracker/flyinglogic": {"name": "flyinglogic", "desc": "Генератор диаграмм Flying Logic (нативный формат .xlogic через JSON+генератор) и деревьев ТОС", "example": "Сделай дерево текущей реальности в Flying Logic", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/flyinglogic.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/flyinglogic.md -o ~/.claude/commands/flyinglogic.md", "isdir": false}, "tracker/l-a-ikr": {"name": "l-a-ikr", "desc": "ИКР — Идеальный Конечный Результат (ТРИЗ)", "example": "Разреши противоречие: нужна и скорость, и качество", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/l-a-ikr.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/l-a-ikr.md -o ~/.claude/commands/l-a-ikr.md", "isdir": false}, "tracker/l-a-rat": {"name": "l-a-rat", "desc": "Risk Assumption Test — анализ рисков продуктовой идеи по Strategyzer", "example": "Проверь рискованные допущения моей продуктовой идеи", "git": "https://github.com/kulakov/skill-collections/blob/master/tracker/skills/l-a-rat.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/tracker/skills/l-a-rat.md -o ~/.claude/commands/l-a-rat.md", "isdir": false}, "larp/l-g-algo": {"name": "l-g-algo", "desc": "Создание LARP через алгоритмы", "example": "Создай LARP по методу false paths про детектив", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-algo", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-algo ~/.claude/skills/l-g-algo", "isdir": true}, "larp/l-g-archivist": {"name": "l-g-archivist", "desc": "Нежный Архивист — строитель живых миров из лора", "example": "Оживи мир постапокалиптического сеттинга для игры", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-archivist.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-archivist.md -o ~/.claude/commands/l-g-archivist.md", "isdir": false}, "larp/l-g-box": {"name": "l-g-box", "desc": "Упаковка LARP в коробку для проведения без автора", "example": "Упакуй мою LARP в коробку для других мастеров", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-box", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-box ~/.claude/skills/l-g-box", "isdir": true}, "larp/l-g-call": {"name": "l-g-call", "desc": "Анализ транскриптов созвонов по LARP", "example": "Разбери транскрипт созвона мастеров по нашей игре", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-call", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-call ~/.claude/skills/l-g-call", "isdir": true}, "larp/l-g-canon": {"name": "l-g-canon", "desc": "Хранитель Канона — систематизатор лора в source of truth", "example": "Систематизируй лор игры в source of truth", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-canon.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-canon.md -o ~/.claude/commands/l-g-canon.md", "isdir": false}, "larp/l-g-catalog": {"name": "l-g-catalog", "desc": "Каталог 365 механик: 185 метатехник LARP + 180 механик настольных игр (BGG)", "example": "Покажи механики для игры на доверие между игроками", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-catalog.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-catalog.md -o ~/.claude/commands/l-g-catalog.md", "isdir": false}, "larp/l-g-cats": {"name": "l-g-cats", "desc": "CATS Framework для LARP — быстрое выстраивание ожиданий перед игрой", "example": "Выстрой ожидания игроков перед камерной LARP", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-cats", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-cats ~/.claude/skills/l-g-cats", "isdir": true}, "larp/l-g-char": {"name": "l-g-char", "desc": "Создание персонажа для LARP через психологическое интервью", "example": "Создай персонажа через психологическое интервью", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-char", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-char ~/.claude/skills/l-g-char", "isdir": true}, "larp/l-g-check": {"name": "l-g-check", "desc": "Проверка целостности LARP через призму Nordic подхода", "example": "Проверь готовность моего сценария LARP", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-check", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-check ~/.claude/skills/l-g-check", "isdir": true}, "larp/l-g-check-mechanic": {"name": "l-g-check-mechanic", "desc": "Проверка игровой механики на последствия", "example": "Проверь, что сломается от этой механики обмена картами", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-check-mechanic.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-check-mechanic.md -o ~/.claude/commands/l-g-check-mechanic.md", "isdir": false}, "larp/l-g-create": {"name": "l-g-create", "desc": "Помощник по разработке сценариев LARP", "example": "Придумай сценарий LARP про космическую станцию", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-create", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-create ~/.claude/skills/l-g-create", "isdir": true}, "larp/l-g-delo": {"name": "l-g-delo", "desc": "Конструктор дела для Кабуки-кабинетки LARP 'Невидимый монах'. Интервью по 5 блокам → схема дела → полный бриф по канону", "example": "Собери новое дело для камерной детективной игры", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-delo.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-delo.md -o ~/.claude/commands/l-g-delo.md", "isdir": false}, "larp/l-g-design": {"name": "l-g-design", "desc": "Конструктор LARP-игры на базе каталога 159 метатехник из library.lance.ru (47 Nordic + 112 русских)", "example": "Подбери метатехники для игры с эмоциональным блидом", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-design", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-design ~/.claude/skills/l-g-design", "isdir": true}, "larp/l-g-doc": {"name": "l-g-doc", "desc": "Полная документация LARP по Nordic стандартам", "example": "Задокументируй мою LARP по Nordic-стандартам", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-doc", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-doc ~/.claude/skills/l-g-doc", "isdir": true}, "larp/l-g-dybowski": {"name": "l-g-dybowski", "desc": "Субагент Дыбовского — провокатор экзистенциальной глубины в геймдизайне", "example": "Добавь экзистенциальной глубины в концепт игры про память", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-dybowski.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-dybowski.md -o ~/.claude/commands/l-g-dybowski.md", "isdir": false}, "larp/l-g-edit": {"name": "l-g-edit", "desc": "Редактирование прозы и персонажей для LARP/литературы", "example": "Отредактируй прозу загруза персонажа", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-edit", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-edit ~/.claude/skills/l-g-edit", "isdir": true}, "larp/l-g-extract": {"name": "l-g-extract", "desc": "Извлечение идей из конспектов по геймдизайну", "example": "Извлеки идеи из конспекта лекции по геймдизайну", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-extract", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-extract ~/.claude/skills/l-g-extract", "isdir": true}, "larp/l-g-funeral-design": {"name": "l-g-funeral-design", "desc": "Дизайн похоронной механики LARP 'Невидимый монах'", "example": "Спроектируй похоронную механику для сцены с мертвецом", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-funeral-design.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-funeral-design.md -o ~/.claude/commands/l-g-funeral-design.md", "isdir": false}, "larp/l-g-interview": {"name": "l-g-interview", "desc": "Интервью с мастером для создания описания LARP", "example": "Возьми интервью у мастера для анонса игры", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-interview", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-interview ~/.claude/skills/l-g-interview", "isdir": true}, "larp/l-g-mg": {"name": "l-g-mg", "desc": "Анализ папки Мастерки LARP-проекта", "example": "Проанализируй мастерскую папку моего проекта", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-mg", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-mg ~/.claude/skills/l-g-mg", "isdir": true}, "larp/l-g-midjourney": {"name": "l-g-midjourney", "desc": "Синтаксис и параметры Midjourney", "example": "Как написать промпт для Midjourney с нужным соотношением сторон", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-midjourney.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-midjourney.md -o ~/.claude/commands/l-g-midjourney.md", "isdir": false}, "larp/l-g-neurolenoran": {"name": "l-g-neurolenoran", "desc": "Нейроленоран — AI-персона режиссёра/продюсера для проекта 'Невидимый монах' (LARP)", "example": "Проверь сцену из игры глазами режиссёра Ленорана", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-neurolenoran.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-neurolenoran.md -o ~/.claude/commands/l-g-neurolenoran.md", "isdir": false}, "larp/l-g-nordic": {"name": "l-g-nordic", "desc": "Синтезированный скрипт создания Nordic LARP", "example": "Создай Nordic LARP про эмиграцию по методу Стенроса", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-nordic", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-nordic ~/.claude/skills/l-g-nordic", "isdir": true}, "larp/l-g-nri": {"name": "l-g-nri", "desc": "Мастер настольных ролевых игр (НРИ/TTRPG)", "example": "Проведи сессию настольной ролевой про подземелье", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-nri", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-nri ~/.claude/skills/l-g-nri", "isdir": true}, "larp/l-g-portrait": {"name": "l-g-portrait", "desc": "Промпт для генерации портретов в Midjourney/DALL-E", "example": "Напиши промпт для портрета сурового рыцаря в Midjourney", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-portrait.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-portrait.md -o ~/.claude/commands/l-g-portrait.md", "isdir": false}, "larp/l-g-scriptdoc": {"name": "l-g-scriptdoc", "desc": "Скрипт-доктор интерактивного нарратива", "example": "Проверь структуру эпизода интерактивного сериала", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-scriptdoc", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-scriptdoc ~/.claude/skills/l-g-scriptdoc", "isdir": true}, "larp/l-g-setting": {"name": "l-g-setting", "desc": "10 методик создания сеттинга для LARP и художественных произведений", "example": "Придумай мир для постапокалиптической ролевой игры", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-setting", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-setting ~/.claude/skills/l-g-setting", "isdir": true}, "larp/l-g-suno": {"name": "l-g-suno", "desc": "Синтаксис и параметры Suno для генерации музыки", "example": "Напиши промпт для Suno под эмбиент-трек для кофейни", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-suno.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-suno.md -o ~/.claude/commands/l-g-suno.md", "isdir": false}, "larp/l-g-syuzhet": {"name": "l-g-syuzhet", "desc": "Пошаговый конструктор сюжета для LARP", "example": "Построй сюжет для исторической ролевой игры на 12 человек", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/l-g-syuzhet.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/l-g-syuzhet.md -o ~/.claude/commands/l-g-syuzhet.md", "isdir": false}, "larp/l-g-vai": {"name": "l-g-vai", "desc": "Методика от Вая для создания LARP", "example": "Сделай LARP по методу Вая для команды из 8 человек", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/l-g-vai", "install": "npx degit kulakov/skill-collections/larp/skills/l-g-vai ~/.claude/skills/l-g-vai", "isdir": true}, "larp/neurolenoran": {"name": "neurolenoran", "desc": "Нейроленоран — AI-персона продюсера LARP (по образу Андрея Салика). Собирает разрозненные идеи в связный документ, находит дыры, применяет 3 принципа и 5 проверок", "example": "Собери мои разрозненные идеи по LARP в связный документ", "git": "https://github.com/kulakov/skill-collections/tree/master/larp/skills/neurolenoran", "install": "npx degit kulakov/skill-collections/larp/skills/neurolenoran ~/.claude/skills/neurolenoran", "isdir": true}, "larp/playtest-analysis": {"name": "playtest-analysis", "desc": "Анализ плейтест-фидбека: CSV -> темы -> дашборд", "example": "Проанализируй CSV с фидбеком плейтеста настолки", "git": "https://github.com/kulakov/skill-collections/blob/master/larp/skills/playtest-analysis.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/larp/skills/playtest-analysis.md -o ~/.claude/commands/playtest-analysis.md", "isdir": false}, "dev/ai-agents-architect": {"name": "ai-agents-architect", "desc": "Архитектура автономных AI-агентов: tool use, память, планирование, оркестрация", "example": "Спроектируй архитектуру автономного агента для поддержки клиентов", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/ai-agents-architect", "install": "npx degit kulakov/skill-collections/dev/skills/ai-agents-architect ~/.claude/skills/ai-agents-architect", "isdir": true}, "dev/ai-product": {"name": "ai-product", "desc": "Разработка AI-продуктов: LLM-интеграция, RAG, prompt engineering, AI UX, оптимизация костов", "example": "Помоги собрать RAG для базы знаний нашего SaaS", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/ai-product", "install": "npx degit kulakov/skill-collections/dev/skills/ai-product ~/.claude/skills/ai-product", "isdir": true}, "dev/ai-wrapper-product": {"name": "ai-wrapper-product", "desc": "Продукты-обёртки над AI API (OpenAI, Anthropic)", "example": "Хочу сделать обёртку над GPT для юристов, с чего начать", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/ai-wrapper-product", "install": "npx degit kulakov/skill-collections/dev/skills/ai-wrapper-product ~/.claude/skills/ai-wrapper-product", "isdir": true}, "dev/autonomous-researcher": {"name": "autonomous-researcher", "desc": "Автономный AI-исследователь с параллельными агентами", "example": "Запусти автономное исследование рынка AI-ассистентов", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/autonomous-researcher.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/autonomous-researcher.md -o ~/.claude/commands/autonomous-researcher.md", "isdir": false}, "dev/docker-sandbox": {"name": "docker-sandbox", "desc": "Запуск Claude Code в Docker Sandbox без подтверждений", "example": "Запусти разработку фичи в песочнице без подтверждений", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/docker-sandbox.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/docker-sandbox.md -o ~/.claude/commands/docker-sandbox.md", "isdir": false}, "dev/frontend-design": {"name": "frontend-design", "desc": "Выразительные production-grade фронтенд-интерфейсы высокого качества", "example": "Свёрстай красивую главную страницу для SaaS-стартапа", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/frontend-design", "install": "npx degit kulakov/skill-collections/dev/skills/frontend-design ~/.claude/skills/frontend-design", "isdir": true}, "dev/l-d-agent-sdk": {"name": "l-d-agent-sdk", "desc": "Скаффолд нового проекта на Claude Agent SDK", "example": "Создай AI-агента для саппорта SaaS для отелей", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/l-d-agent-sdk.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/l-d-agent-sdk.md -o ~/.claude/commands/l-d-agent-sdk.md", "isdir": false}, "dev/l-d-cli": {"name": "l-d-cli", "desc": "Создание composable CLI-инструмента из API docs, OpenAPI, curl, SDK или скрипта", "example": "Сделай CLI-обёртку над API сервиса доставки еды", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/l-d-cli.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/l-d-cli.md -o ~/.claude/commands/l-d-cli.md", "isdir": false}, "dev/l-d-local": {"name": "l-d-local", "desc": "Запуск Claude Code с локальной моделью через Ollama", "example": "Запусти Claude Code на локальной модели через Ollama", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/l-d-local.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/l-d-local.md -o ~/.claude/commands/l-d-local.md", "isdir": false}, "dev/l-d-vibe-setup": {"name": "l-d-vibe-setup", "desc": "Управление сетапом вайб-дизайна JetStyle: статус инструментов, роадмап, scaffold проектов, SOP, CMS-стратегия", "example": "Покажи статус инструментов вайб-кодинга", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/l-d-vibe-setup.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/l-d-vibe-setup.md -o ~/.claude/commands/l-d-vibe-setup.md", "isdir": false}, "dev/l-nic": {"name": "l-nic", "desc": "NIC Method — структурированная фасилитация проекта (Brief -> Challenge -> Debrief -> Plan -> Spec)", "example": "Фасилитируй проект редизайна сайта по методу NIC", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/l-nic", "install": "npx degit kulakov/skill-collections/dev/skills/l-nic ~/.claude/skills/l-nic", "isdir": true}, "dev/l-x-frontend": {"name": "l-x-frontend", "desc": "Создание выразительных фронтенд-интерфейсов с высоким качеством дизайна", "example": "Сделай красивый необычный лендинг для курса по дизайну", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/l-x-frontend.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/l-x-frontend.md -o ~/.claude/commands/l-x-frontend.md", "isdir": false}, "dev/mcp-builder": {"name": "mcp-builder", "desc": "Создание MCP-серверов (Model Context Protocol)", "example": "Создай MCP-сервер для интеграции с нашей CRM", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/mcp-builder", "install": "npx degit kulakov/skill-collections/dev/skills/mcp-builder ~/.claude/skills/mcp-builder", "isdir": true}, "dev/multi-agent-patterns": {"name": "multi-agent-patterns", "desc": "Паттерны мульти-агентных систем: оркестратор, peer-to-peer, иерархия", "example": "Спроектируй мульти-агентную систему с оркестратором для поддержки", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/multi-agent-patterns", "install": "npx degit kulakov/skill-collections/dev/skills/multi-agent-patterns ~/.claude/skills/multi-agent-patterns", "isdir": true}, "dev/n8n-mcp-tools-expert": {"name": "n8n-mcp-tools-expert", "desc": "Эксперт по n8n-mcp MCP инструментам", "example": "Собери n8n-воркфлоу для рассылки уведомлений клиентам", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/n8n-mcp-tools-expert", "install": "npx degit kulakov/skill-collections/dev/skills/n8n-mcp-tools-expert ~/.claude/skills/n8n-mcp-tools-expert", "isdir": true}, "dev/owasp-security": {"name": "owasp-security", "desc": "OWASP security review", "example": "Проверь безопасность бэкенда нашего стартапа по OWASP", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/owasp-security.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/owasp-security.md -o ~/.claude/commands/owasp-security.md", "isdir": false}, "dev/port-doctor": {"name": "port-doctor", "desc": "Управление локальными сервисами и портами", "example": "Что-то висит на порту 3000, освободи его", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/port-doctor.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/port-doctor.md -o ~/.claude/commands/port-doctor.md", "isdir": false}, "dev/prompt-engineering-patterns": {"name": "prompt-engineering-patterns", "desc": "Продвинутые техники prompt engineering для LLM", "example": "Оптимизируй мой промпт для саппорт-бота отеля", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/prompt-engineering-patterns", "install": "npx degit kulakov/skill-collections/dev/skills/prompt-engineering-patterns ~/.claude/skills/prompt-engineering-patterns", "isdir": true}, "dev/repo-task-proof-loop": {"name": "repo-task-proof-loop", "desc": "Верифицируемый цикл разработки для сложных задач: freeze spec → build → evidence → verify (fresh session) → fix. Создаёт .agent/tasks/ с артефактами, ставит субагентов (spec-freezer, builder, verifier, fixer)", "example": "Прогони сложную фичу авторизации через цикл с верификацией", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/repo-task-proof-loop", "install": "npx degit kulakov/skill-collections/dev/skills/repo-task-proof-loop ~/.claude/skills/repo-task-proof-loop", "isdir": true}, "dev/schema": {"name": "schema", "desc": "Schema.org разметка и структурированные данные на сайте", "example": "Добавь Schema.org разметку на страницу услуг кофейни", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/schema", "install": "npx degit kulakov/skill-collections/dev/skills/schema ~/.claude/skills/schema", "isdir": true}, "dev/sdd-spec-design": {"name": "sdd-spec-design", "desc": "Создание технического дизайна для SDD-спецификации", "example": "Опиши технический дизайн для модуля бронирования отеля", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-spec-design.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-spec-design.md -o ~/.claude/commands/sdd-spec-design.md", "isdir": false}, "dev/sdd-spec-impl": {"name": "sdd-spec-impl", "desc": "Выполнение задач спецификации по TDD-методологии", "example": "Имплементируй спеку модуля оплаты по TDD", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-spec-impl.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-spec-impl.md -o ~/.claude/commands/sdd-spec-impl.md", "isdir": false}, "dev/sdd-spec-init": {"name": "sdd-spec-init", "desc": "Инициализация новой SDD-спецификации с описанием проекта", "example": "Создай новую спецификацию для фичи онбординга", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-spec-init.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-spec-init.md -o ~/.claude/commands/sdd-spec-init.md", "isdir": false}, "dev/sdd-spec-requirements": {"name": "sdd-spec-requirements", "desc": "Генерация требований для SDD-спецификации", "example": "Сгенерируй требования для модуля экспорта отчётов", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-spec-requirements.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-spec-requirements.md -o ~/.claude/commands/sdd-spec-requirements.md", "isdir": false}, "dev/sdd-spec-status": {"name": "sdd-spec-status", "desc": "Статус и прогресс SDD-спецификации", "example": "Покажи прогресс по спеке платёжного шлюза", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-spec-status.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-spec-status.md -o ~/.claude/commands/sdd-spec-status.md", "isdir": false}, "dev/sdd-spec-tasks": {"name": "sdd-spec-tasks", "desc": "Генерация задач имплементации для SDD-спецификации", "example": "Разбей спеку чата поддержки на задачи имплементации", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-spec-tasks.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-spec-tasks.md -o ~/.claude/commands/sdd-spec-tasks.md", "isdir": false}, "dev/sdd-steering": {"name": "sdd-steering", "desc": "Управление steering-файлами как persistent project knowledge", "example": "Обнови steering-файлы знаниями о нашем стеке", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-steering.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-steering.md -o ~/.claude/commands/sdd-steering.md", "isdir": false}, "dev/sdd-validate-design": {"name": "sdd-validate-design", "desc": "Интерактивная проверка качества технического дизайна", "example": "Проверь качество дизайна спеки биллинга", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-validate-design.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-validate-design.md -o ~/.claude/commands/sdd-validate-design.md", "isdir": false}, "dev/sdd-validate-gap": {"name": "sdd-validate-gap", "desc": "Анализ разрыва между требованиями и существующим кодом", "example": "Покажи разрыв между спекой и текущим кодом профиля", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-validate-gap.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-validate-gap.md -o ~/.claude/commands/sdd-validate-gap.md", "isdir": false}, "dev/sdd-validate-impl": {"name": "sdd-validate-impl", "desc": "Валидация имплементации против требований, дизайна и задач", "example": "Проверь, соответствует ли код спеке модуля заявок", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/sdd-validate-impl.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/sdd-validate-impl.md -o ~/.claude/commands/sdd-validate-impl.md", "isdir": false}, "dev/security-reviewer": {"name": "security-reviewer", "desc": "Security reviewer subagent", "example": "Проверь код авторизации на уязвимости", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/security-reviewer.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/security-reviewer.md -o ~/.claude/commands/security-reviewer.md", "isdir": false}, "dev/senior-review": {"name": "senior-review", "desc": "Senior Engineer Review — полный ревью кода с паузами между секциями", "example": "Сделай полное ревью моих изменений в модуле оплаты", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/senior-review.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/senior-review.md -o ~/.claude/commands/senior-review.md", "isdir": false}, "dev/tanenbaum": {"name": "tanenbaum", "desc": "Архитектура распределённых систем по Таненбауму. Используй при задачах об интеграциях между сервисами, событийной/асинхронной архитектуре, репликации, консистентности, отказоустойчивости, consensus, координации процессов", "example": "Спроектируй обмен заказами между двумя микросервисами", "git": "https://github.com/kulakov/skill-collections/blob/master/dev/skills/tanenbaum.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/dev/skills/tanenbaum.md -o ~/.claude/commands/tanenbaum.md", "isdir": false}, "dev/telegram-bot-builder": {"name": "telegram-bot-builder", "desc": "Создание Telegram-ботов: от простой автоматизации до AI-ботов", "example": "Сделай телеграм-бота для записи в барбершоп", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/telegram-bot-builder", "install": "npx degit kulakov/skill-collections/dev/skills/telegram-bot-builder ~/.claude/skills/telegram-bot-builder", "isdir": true}, "dev/telegram-mini-app": {"name": "telegram-mini-app", "desc": "Создание Telegram Mini Apps (TWA)", "example": "Собери мини-приложение в телеграме для заказа еды", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/telegram-mini-app", "install": "npx degit kulakov/skill-collections/dev/skills/telegram-mini-app ~/.claude/skills/telegram-mini-app", "isdir": true}, "dev/workflow-automation": {"name": "workflow-automation", "desc": "Автоматизация воркфлоу с кодом: n8n, Temporal, Inngest, durable execution", "example": "Настрой durable-воркфлоу обработки заказов на Temporal", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/workflow-automation", "install": "npx degit kulakov/skill-collections/dev/skills/workflow-automation ~/.claude/skills/workflow-automation", "isdir": true}, "dev/zapier-make-patterns": {"name": "zapier-make-patterns", "desc": "No-code автоматизация через Zapier и Make", "example": "Свяжи форму заявок с CRM через Zapier", "git": "https://github.com/kulakov/skill-collections/tree/master/dev/skills/zapier-make-patterns", "install": "npx degit kulakov/skill-collections/dev/skills/zapier-make-patterns ~/.claude/skills/zapier-make-patterns", "isdir": true}, "design/add-style": {"name": "add-style", "desc": "Добавление нового стиля в библиотеку стилей изображений", "example": "Запомни этот визуальный стиль в библиотеку", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/add-style.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/add-style.md -o ~/.claude/commands/add-style.md", "isdir": false}, "design/design-oracle": {"name": "design-oracle", "desc": "Извлекает дизайн-систему живого сайта по URL через браузер (Playwright): цвета, типографика, spacing, радиусы, компоненты, UX-паттерны, КОМПОЗИЦИЮ (type scale, grid-колонки, выравнивание, ритм секций, паттерны компоновки) и АНИМАЦИИ (CSS transitions с easing, @keyframes, transforms, библиотеки Framer/GSAP/Lenis/AOS, scroll-driven, smooth scroll) → экспорт в DESIGN.md, Tailwind config, React-стабы и JSON-токены", "example": "Извлеки дизайн-систему вон того сайта по URL", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/design-oracle", "install": "npx degit kulakov/skill-collections/design/skills/design-oracle ~/.claude/skills/design-oracle", "isdir": true}, "design/frontend-design": {"name": "frontend-design", "desc": "Выразительные production-grade фронтенд-интерфейсы высокого качества", "example": "Свёрстай красивую главную страницу для SaaS-стартапа", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/frontend-design", "install": "npx degit kulakov/skill-collections/design/skills/frontend-design ~/.claude/skills/frontend-design", "isdir": true}, "design/l-d-decompose": {"name": "l-d-decompose", "desc": "Разрезатор референсов на приёмы — декомпозиция лендинга/сайта на 7 слоёв дизайн-решений", "example": "Разбери на приёмы лендинг этого B2B-стартапа", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-decompose.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-decompose.md -o ~/.claude/commands/l-d-decompose.md", "isdir": false}, "design/l-d-design-system": {"name": "l-d-design-system", "desc": "Извлечение портативной дизайн-системы из декомпозиции референса", "example": "Извлеки дизайн-систему из референса лендинга кофейни", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-design-system.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-design-system.md -o ~/.claude/commands/l-d-design-system.md", "isdir": false}, "design/l-d-ds-codify": {"name": "l-d-ds-codify", "desc": "Кодификация дизайн-системы проекта: аудит CSS, создание токенов, LLM-readable спеки, скрипт аудита, замена hardcoded значений", "example": "Кодифицируй дизайн-систему нашего дашборда, замени хардкод", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-ds-codify.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-ds-codify.md -o ~/.claude/commands/l-d-ds-codify.md", "isdir": false}, "design/l-d-enhance": {"name": "l-d-enhance", "desc": "Апскейл изображений через AuraSR v2 (4x, GAN, локально на MPS)", "example": "Увеличь разрешение этой иконки в четыре раза", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-enhance.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-enhance.md -o ~/.claude/commands/l-d-enhance.md", "isdir": false}, "design/l-d-figma": {"name": "l-d-figma", "desc": "Figma <-> Code раундтрип", "example": "Свёрстай этот макет из Figma в HTML", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-figma.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-figma.md -o ~/.claude/commands/l-d-figma.md", "isdir": false}, "design/l-d-img-edit": {"name": "l-d-img-edit", "desc": "Редактор картинок с контролем композиции", "example": "Поправь композицию на обложке, сдвинь логотип влево", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-img-edit.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-img-edit.md -o ~/.claude/commands/l-d-img-edit.md", "isdir": false}, "design/l-d-landing": {"name": "l-d-landing", "desc": "Методика структуры и копирайтинга лендинга (StoryBrand, PAS, AIDA)", "example": "Напиши конверсионный текст лендинга для B2B-стартапа", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-landing.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-landing.md -o ~/.claude/commands/l-d-landing.md", "isdir": false}, "design/l-d-slides": {"name": "l-d-slides", "desc": "Генератор HTML-презентаций из markdown", "example": "Сделай слайды из этого текста про запуск стартапа", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-slides.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-slides.md -o ~/.claude/commands/l-d-slides.md", "isdir": false}, "design/l-d-vibe-landing": {"name": "l-d-vibe-landing", "desc": "Вайб-кодинг лендингов по референсу", "example": "Сверстай лендинг в стиле сайта известного SaaS", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-d-vibe-landing.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-d-vibe-landing.md -o ~/.claude/commands/l-d-vibe-landing.md", "isdir": false}, "design/l-g-portrait": {"name": "l-g-portrait", "desc": "Промпт для генерации портретов в Midjourney/DALL-E", "example": "Напиши промпт для портрета сурового рыцаря в Midjourney", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-g-portrait.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-g-portrait.md -o ~/.claude/commands/l-g-portrait.md", "isdir": false}, "design/l-s-slide-check": {"name": "l-s-slide-check", "desc": "Проверка композиции HTML-презентации", "example": "Проверь композицию и типографику моей презентации", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-s-slide-check.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-s-slide-check.md -o ~/.claude/commands/l-s-slide-check.md", "isdir": false}, "design/l-s-slide-fit": {"name": "l-s-slide-fit", "desc": "Подгонка контента под слайды до генерации HTML", "example": "Проверь, влезет ли этот текст на один слайд", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/l-s-slide-fit.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/l-s-slide-fit.md -o ~/.claude/commands/l-s-slide-fit.md", "isdir": false}, "design/map-maker": {"name": "map-maker", "desc": "Генератор карт вымышленного мира. World-as-data: YAML источник истины + nano-banana растровый рендеринг + pycairo векторный рендеринг", "example": "Сгенерируй карту вымышленного мира для настолки", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/map-maker", "install": "npx degit kulakov/skill-collections/design/skills/map-maker ~/.claude/skills/map-maker", "isdir": true}, "design/nanobanana": {"name": "nanobanana", "desc": "Генерация изображений через Gemini API", "example": "Дорисуй чашку на этой картинке с кофейней", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/nanobanana.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/nanobanana.md -o ~/.claude/commands/nanobanana.md", "isdir": false}, "design/page-cro": {"name": "page-cro", "desc": "Оптимизация конверсии страниц (CRO)", "example": "Разбери лендинг кофейни, почему низкая конверсия", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/page-cro", "install": "npx degit kulakov/skill-collections/design/skills/page-cro ~/.claude/skills/page-cro", "isdir": true}, "design/prd-review": {"name": "prd-review", "desc": "Ревью PRD документа по чеклисту качества", "example": "Проверь мой PRD по чеклисту качества", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/prd-review.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/prd-review.md -o ~/.claude/commands/prd-review.md", "isdir": false}, "design/site-architecture": {"name": "site-architecture", "desc": "Иерархия страниц сайта, навигация, URL-структура, внутренняя перелинковка", "example": "Спроектируй структуру страниц и навигацию сайта школы", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/site-architecture", "install": "npx degit kulakov/skill-collections/design/skills/site-architecture ~/.claude/skills/site-architecture", "isdir": true}, "design/style-profile": {"name": "style-profile", "desc": "ОСНОВНОЙ скилл для клонирования визуального стиля. Извлекает JSON brand-style-profile из 1–N изображений или со страниц сайта — чтобы AI мог сгенерировать НОВЫЙ контент в том же стиле для любой темы", "example": "Извлеки визуальный стиль с лендинга кофейни", "git": "https://github.com/kulakov/skill-collections/blob/master/design/skills/style-profile.md", "install": "curl -fsSL https://raw.githubusercontent.com/kulakov/skill-collections/master/design/skills/style-profile.md -o ~/.claude/commands/style-profile.md", "isdir": false}, "design/ui-ux-pro-max": {"name": "ui-ux-pro-max", "desc": "Дизайн-система и UX-справочник для веба и мобайла", "example": "Подбери палитру и шрифты для дашборда B2B-стартапа", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/ui-ux-pro-max", "install": "npx degit kulakov/skill-collections/design/skills/ui-ux-pro-max ~/.claude/skills/ui-ux-pro-max", "isdir": true}, "design/ux-audit-rethink": {"name": "ux-audit-rethink", "desc": "Комплексный UX-аудит по 7 факторам IxDF, 5 характеристикам юзабилити, 5 измерениям взаимодействия, 12 Laws of UX (Hick's, Fitts's, Miller's, Jakob's, Doherty, Peak-End, Von Restorff, Serial Position, Aesthetic-Usability, Tesler's, Postel's, Zeigarnik), Gestalt-принципам, и Liz Lerman Critical Response Process. С severity scoring", "example": "Проведи UX-аудит формы регистрации в нашем приложении", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/ux-audit-rethink", "install": "npx degit kulakov/skill-collections/design/skills/ux-audit-rethink ~/.claude/skills/ux-audit-rethink", "isdir": true}, "design/ux-scenario-redesign": {"name": "ux-scenario-redesign", "desc": "UX+UI редизайн под целевой сценарий", "example": "Переделай интерфейс настроек под сценарий быстрого старта", "git": "https://github.com/kulakov/skill-collections/tree/master/design/skills/ux-scenario-redesign", "install": "npx degit kulakov/skill-collections/design/skills/ux-scenario-redesign ~/.claude/skills/ux-scenario-redesign", "isdir": true}}</script>
+<script>
+const D=JSON.parse(document.getElementById('d').textContent);
+const bd=document.getElementById('bd'),md=document.getElementById('md');
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function open_(id){
+  const x=D[id]; if(!x)return;
+  const ex=x.example?`<div class="m-sec"><h4>Пример запроса · синтетический</h4><div class="m-ex">«${esc(x.example)}»</div></div>`:'';
+  md.innerHTML=`<button class="x" id="mx">×</button>
+    <div class="m-nm">/${esc(x.name)}</div>
+    <div class="m-desc">${esc(x.desc)}</div>
+    ${ex}
+    <div class="m-sec"><h4>Скопировать себе ${x.isdir?'(папка-скилл)':'(команда)'}</h4>
+      <div class="code"><code id="cmd">${esc(x.install)}</code><button class="cp" id="cp">Копировать</button></div></div>
+    <div class="m-foot"><a class="gh" href="${esc(x.git)}" target="_blank">Открыть на GitHub →</a></div>`;
+  bd.classList.add('show');
+  document.getElementById('mx').onclick=close_;
+  document.getElementById('cp').onclick=()=>{navigator.clipboard?.writeText(x.install).then(()=>toast('Команда скопирована'));};
+}
+function close_(){bd.classList.remove('show')}
+document.querySelectorAll('.sk').forEach(el=>el.onclick=()=>open_(el.dataset.id));
+bd.addEventListener('click',e=>{if(e.target===bd)close_()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close_()});
+const t=document.getElementById('toast');let tm;
+function toast(m){t.textContent=m;t.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>t.classList.remove('show'),1600)}
+</script></body></html>
