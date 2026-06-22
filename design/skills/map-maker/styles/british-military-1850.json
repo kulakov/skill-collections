@@ -1,0 +1,69 @@
+{
+  "name": "British Military Maps 1850s",
+  "description": "Стиль военных карт британской Ordnance Survey 1850-х. Engraved copper plates, hachuring, триангуляция, военная точность.",
+
+  "paper": [242, 235, 220],
+  "ink": [35, 30, 25],
+  "ink_light": [100, 90, 75],
+  "water": [180, 195, 210],
+  "water_dark": [130, 145, 165],
+  "mountain": [70, 60, 50],
+  "road": [90, 75, 60],
+  "forest": [65, 85, 60],
+  "city_fill": [220, 210, 195],
+  "ruin_color": [130, 110, 90],
+  "triangulation": [200, 50, 50],
+
+  "font_family": "serif",
+  "font_style": "normal",
+  "font_weight": "normal",
+
+  "hachures": true,
+  "hachure_style": "dense_military",
+  "hachure_angle": 45,
+  "hachure_spacing": 3,
+
+  "compass_rose": true,
+  "compass_style": "military_arrow",
+
+  "scale_bar": true,
+  "scale_style": "chains",
+  "scale_unit": "chains",
+
+  "cartouche": true,
+  "cartouche_style": "military_simple",
+
+  "decorative_border": true,
+  "border_style": "double_line",
+
+  "water_hachure_density": 6,
+  "water_hachure_wave": false,
+  "water_hachure_parallel": true,
+
+  "mountain_style": "hachure_dense",
+  "mountain_hachure_density": 8,
+  "show_triangulation_points": true,
+
+  "city_icon": "fortification",
+  "road_style": "solid_thin",
+
+  "engraved_copper_simulation": true,
+  "line_weight_variation": 0.15,
+  "patina_effect": true,
+
+  "military_annotations": {
+    "show_elevation_points": true,
+    "show_military_positions": false,
+    "show_survey_marks": true,
+    "show_restricted_areas": false
+  },
+
+  "notes": [
+    "Based on Ordnance Survey County Series (1840s-1890s)",
+    "Hachuring technique (pre-contour lines era)",
+    "Engraved copper plates aesthetic",
+    "Military triangulation survey methodology",
+    "1:2500 and 1:10560 scales reference",
+    "War Office restricted versions style"
+  ]
+}

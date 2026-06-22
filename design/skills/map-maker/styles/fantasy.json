@@ -1,0 +1,32 @@
+{
+  "name": "Fantasy Map",
+  "description": "Castle icons, volumetric mountains, пергамент — стиль фэнтези-карт в духе Tolkien/D&D",
+
+  "paper": [242, 235, 220],
+  "ink": [60, 50, 40],
+  "ink_light": [140, 130, 110],
+  "water": [180, 200, 220],
+  "water_dark": [120, 150, 180],
+  "mountain": [100, 90, 70],
+  "road": [110, 95, 75],
+  "forest": [85, 105, 75],
+  "city_fill": [220, 210, 190],
+  "ruin_color": [150, 130, 110],
+
+  "font_family": "serif",
+  "font_style": "normal",
+  "font_weight": "bold",
+
+  "hachures": false,
+  "compass_rose": true,
+  "scale_bar": false,
+  "cartouche": true,
+  "decorative_border": true,
+
+  "water_fill": "solid",
+  "mountain_style": "volumetric",
+  "city_icon": "castle",
+  "road_style": "solid_thin",
+  "sea_monsters": true,
+  "aged_paper_texture": true
+}

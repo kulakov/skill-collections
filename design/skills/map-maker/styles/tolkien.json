@@ -1,0 +1,34 @@
+{
+  "name": "Middle-earth Style",
+  "description": "Runic fonts, aged paper, темные хачуры — стиль карт Средиземья",
+
+  "paper": [232, 218, 195],
+  "ink": [40, 30, 20],
+  "ink_light": [110, 95, 75],
+  "water": [165, 180, 200],
+  "water_dark": [120, 140, 160],
+  "mountain": [70, 60, 45],
+  "road": [90, 75, 55],
+  "forest": [65, 85, 55],
+  "city_fill": [220, 210, 185],
+  "ruin_color": [130, 110, 90],
+
+  "font_family": "serif",
+  "font_style": "italic",
+  "font_weight": "normal",
+
+  "hachures": true,
+  "compass_rose": true,
+  "scale_bar": false,
+  "cartouche": true,
+  "decorative_border": true,
+
+  "water_hachure_density": 9,
+  "water_hachure_wave": false,
+  "mountain_style": "hachure_dark",
+  "city_icon": "tower",
+  "road_style": "dotted",
+  "runic_decorations": true,
+  "aged_paper_texture": true,
+  "border_style": "celtic"
+}

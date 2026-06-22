@@ -1,0 +1,32 @@
+{
+  "name": "Modern Minimalist",
+  "description": "Минимализм, чистые линии, sans-serif — стиль современных картографических сервисов",
+
+  "paper": [255, 255, 255],
+  "ink": [30, 30, 30],
+  "ink_light": [120, 120, 120],
+  "water": [100, 150, 200],
+  "water_dark": [70, 120, 170],
+  "mountain": [150, 150, 150],
+  "road": [200, 100, 50],
+  "forest": [100, 180, 100],
+  "city_fill": [240, 240, 240],
+  "ruin_color": [160, 160, 160],
+
+  "font_family": "sans-serif",
+  "font_style": "normal",
+  "font_weight": "normal",
+
+  "hachures": false,
+  "compass_rose": false,
+  "scale_bar": true,
+  "cartouche": false,
+  "decorative_border": false,
+
+  "water_fill": "solid",
+  "mountain_style": "simple_triangle",
+  "city_icon": "circle",
+  "road_style": "solid_thick",
+  "clean_lines": true,
+  "flat_design": true
+}

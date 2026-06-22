@@ -1,0 +1,31 @@
+{
+  "name": "British Ordnance Survey 19th Century",
+  "description": "Гравюра, сепия, штриховка, каллиграфия — стиль топографических карт Британской геодезической службы",
+
+  "paper": [235, 225, 205],
+  "ink": [45, 35, 25],
+  "ink_light": [120, 105, 85],
+  "water": [195, 200, 210],
+  "water_dark": [140, 155, 175],
+  "mountain": [90, 80, 65],
+  "road": [100, 85, 65],
+  "forest": [75, 95, 65],
+  "city_fill": [210, 200, 180],
+  "ruin_color": [140, 120, 100],
+
+  "font_family": "serif",
+  "font_style": "italic",
+  "font_weight": "normal",
+
+  "hachures": true,
+  "compass_rose": true,
+  "scale_bar": true,
+  "cartouche": true,
+  "decorative_border": true,
+
+  "water_hachure_density": 7,
+  "water_hachure_wave": true,
+  "mountain_style": "hachure_dense",
+  "city_icon": "concentric_circles",
+  "road_style": "dashed"
+}

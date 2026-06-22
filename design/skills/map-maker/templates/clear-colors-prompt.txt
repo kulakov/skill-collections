@@ -1,0 +1,141 @@
+# Промпт-шаблон для генерации reference с чистыми цветами
+
+## Базовый промпт (для nano-banana / Gemini)
+
+```
+Top-down map of fictional world: {GEOGRAPHY_DESCRIPTION}
+
+CRITICAL REQUIREMENTS:
+- Deep blue (#2266AA) water, beige (#D4B896) land
+- Sharp boundaries between water and land, NO GRADIENTS
+- Flat colors, cartographic style
+- Ensure all geographic features are fully inside the image (add padding around edges)
+- 1024x1024px
+- No labels, no text, no decorations — pure geography only
+```
+
+## Переменные для подстановки
+
+`{GEOGRAPHY_DESCRIPTION}` — описание географии на английском языке:
+- Моря (seas): их форма, расположение, названия (для контекста)
+- Острова (islands): размер, положение относительно морей
+- Береговая линия (coastline): бухты (bays), мысы (capes), заливы (gulfs)
+- Проливы (straits), перешейки (isthmuses)
+
+## Примеры
+
+### Пример 1: Тал'Лан (Дети глины)
+
+```
+Top-down map of fictional world:
+
+Central sea called "Clay Sea" with complex coastline:
+- Deep bays on western coast
+- Sharp capes on eastern coast
+- Large volcanic island "Clay Shore" in south-center of sea
+- Archipelago of 7 small islands in north of sea
+
+Northwest region:
+- Second sea called "Ash Sea"
+- Narrow mountain isthmus separating Ash Sea from Clay Sea
+
+CRITICAL REQUIREMENTS:
+- Deep blue (#2266AA) water, beige (#D4B896) land
+- Sharp boundaries between water and land, NO GRADIENTS
+- Flat colors, cartographic style
+- Ensure all geographic features are fully inside the image (add padding around edges)
+- 1024x1024px
+- No labels, no text, no decorations — pure geography only
+```
+
+### Пример 2: Простой архипелаг
+
+```
+Top-down map of fictional world:
+
+Archipelago of 5 large islands surrounded by open ocean:
+- One central island (largest, circular shape)
+- Four peripheral islands (crescent-shaped, positioned north/south/east/west)
+- Narrow straits between islands
+
+CRITICAL REQUIREMENTS:
+- Deep blue (#2266AA) water, beige (#D4B896) land
+- Sharp boundaries between water and land, NO GRADIENTS
+- Flat colors, cartographic style
+- Ensure all geographic features are fully inside the image (add padding around edges)
+- 1024x1024px
+- No labels, no text, no decorations — pure geography only
+```
+
+### Пример 3: Континент с внутренним морем
+
+```
+Top-down map of fictional world:
+
+Large continent with inner sea:
+- Horseshoe-shaped landmass
+- Inner sea in center (connected to ocean by narrow strait in south)
+- Rugged western coastline with many bays
+- Smooth eastern coastline
+
+CRITICAL REQUIREMENTS:
+- Deep blue (#2266AA) water, beige (#D4B896) land
+- Sharp boundaries between water and land, NO GRADIENTS
+- Flat colors, cartographic style
+- Ensure all geographic features are fully inside the image (add padding around edges)
+- 1024x1024px
+- No labels, no text, no decorations — pure geography only
+```
+
+## Анти-паттерны (что НЕ включать в промпт)
+
+❌ **Объёмное освещение**: "volumetric lighting", "shading", "3D relief"
+   → Создаёт градиенты, усложняет HSV-сегментацию
+
+❌ **Художественные детали**: "beautiful", "artistic", "painterly style"
+   → Gemini генерирует монохромную карту с близкими цветами
+
+❌ **Текстуры**: "paper texture", "watercolor", "rough edges"
+   → Шумные края контуров, плохо упрощаются Douglas-Peucker
+
+❌ **Иконки и лейблы**: "city icons", "mountain symbols", "sea names"
+   → На этапе reference нужна только чистая география
+
+❌ **Реалистичность**: "realistic", "satellite view", "photo-realistic"
+   → Gemini добавляет тени и блики
+
+## Проверка результата
+
+После генерации reference проверь:
+
+1. **Цветовое разделение** (должно работать):
+   ```python
+   import cv2
+   import numpy as np
+
+   img = cv2.imread("reference.png")
+   hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+   lower_blue = np.array([90, 80, 80])
+   upper_blue = np.array([130, 255, 255])
+   mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+   water_pct = (mask > 0).sum() / mask.size * 100
+   print(f"Water coverage: {water_pct:.1f}%")
+   # Должно быть 10-40% (если меньше 5% или больше 60% — reference плохой)
+   ```
+
+2. **Визуальная проверка**:
+   - Острые границы (не размытые)
+   - Вода = чистый синий (не серо-голубой, не зелёный)
+   - Суша = чистый бежевый (не коричневый, не жёлтый)
+   - Все объекты внутри кадра (не обрезаны)
+
+3. **Если reference плохой** → перегенерировать с усиленным промптом:
+   ```
+   EXTREMELY IMPORTANT: Use ONLY two flat colors without any gradients or shading:
+   - Water: pure blue #2266AA (RGB 34, 102, 170)
+   - Land: pure beige #D4B896 (RGB 212, 184, 150)
+
+   Flat vector map style, NO artistic rendering, NO volumetric effects.
+   ```
