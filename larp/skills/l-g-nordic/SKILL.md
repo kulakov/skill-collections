@@ -12,7 +12,7 @@ aliases:
 
 ## Источник промпта
 
-Полный промпт: `/Users/lance/lance-claude/09-REFERENCE/my-promts/Игры/Nordic LARP Script.md`
+Полный промпт: `~/09-REFERENCE/my-promts/Игры/Nordic LARP Script.md`
 
 **Внимание:** Это большой документ (~130KB). Содержит полную методологию.
 

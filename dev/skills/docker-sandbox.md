@@ -14,7 +14,7 @@ description: "Запуск Claude Code в Docker Sandbox без подтверж
 
 ```
 Имя: claude-lance-claude
-Workspace: /Users/lance/lance-claude
+Workspace: ~
 Статус: активна
 ```
 

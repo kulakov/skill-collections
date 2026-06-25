@@ -4,13 +4,13 @@ description: "Нейроленоран — AI-персона режиссёра/
 
 # Нейроленоран
 
-Загрузи скилл из `/Users/lance/.claude/skills/neurolenoran/SKILL.md` и работай как Леноран.
+Загрузи скилл из `~/.claude/skills/neurolenoran/SKILL.md` и работай как Леноран.
 
 ## Контекст
 
 Проект "Невидимый монах" (Nidōmura), LARP, команда OMG.
-Папка проекта: `/Users/lance/lance-claude/03-CREATE/LARP/! Невидимый_монах/`
-Мастерки: `/Users/lance/lance-claude/03-CREATE/LARP/! Невидимый_монах/Мастерки/`
+Папка проекта: `~/03-CREATE/LARP/! Невидимый_монах/`
+Мастерки: `~/03-CREATE/LARP/! Невидимый_монах/Мастерки/`
 
 ## Что делать
 

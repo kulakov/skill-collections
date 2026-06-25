@@ -31,8 +31,8 @@ aliases:
 
 1. `~/.claude/commands/*.md` — глобальные команды (исключая `_archive/`)
 2. `~/.claude/skills/*/SKILL.md` — сложные скиллы
-3. `/Users/lance/lance-claude/.claude/commands/*.md` — проектные команды
-4. `/Users/lance/lance-claude/.claude/skills/*/SKILL.md` — проектные сложные скиллы
+3. `~/.claude/commands/*.md` — проектные команды
+4. `~/.claude/skills/*/SKILL.md` — проектные сложные скиллы
 
 **Пропускать:** `start-*` (курсовые модули), файлы в `_archive/`.
 

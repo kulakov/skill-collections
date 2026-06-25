@@ -3,7 +3,7 @@ name: design-oracle
 description: "Извлекает дизайн-систему живого сайта по URL через браузер (Playwright): цвета, типографика, spacing, радиусы, компоненты, UX-паттерны, КОМПОЗИЦИЮ (type scale, grid-колонки, выравнивание, ритм секций, паттерны компоновки) и АНИМАЦИИ (CSS transitions с easing, @keyframes, transforms, библиотеки Framer/GSAP/Lenis/AOS, scroll-driven, smooth scroll) → экспорт в DESIGN.md, Tailwind config, React-стабы и JSON-токены. Используй когда пользователь говорит 'проанализируй дизайн сайта', 'извлеки дизайн-систему с сайта', 'какие цвета и шрифты на этом сайте', 'какие анимации на сайте', 'забери анимации с сайта', 'какая композиция/компоновка', 'вытащи токены с URL', 'design tokens с сайта', 'analyze website design', 'extract design system', 'прогони сайт через design oracle', даёт ссылку на сайт и просит разобрать его оформление. НЕ используй для: ручной декомпозиции референса-картинки (l-d-decompose), Figma→код (l-d-figma), вёрстки лендинга по референсу (l-d-vibe-landing), справочника стилей/палитр/брендов без живого сайта (ui-ux-pro-max), генерации дизайн-системы с нуля (l-d-design-system)."
 metadata:
   type: tool-wrapper
-  app: /Users/lance/lance-claude/10-CLAUDE/design-oracle
+  app: ~/10-CLAUDE/design-oracle
 ---
 
 # Design Oracle
@@ -21,10 +21,10 @@ spacing, компоненты, UX-паттерны, либо просит гот
 
 ## Как запускать
 
-Приложение установлено в `/Users/lance/lance-claude/10-CLAUDE/design-oracle`.
+Приложение установлено в `~/10-CLAUDE/design-oracle`.
 
 ```bash
-cd /Users/lance/lance-claude/10-CLAUDE/design-oracle
+cd ~/10-CLAUDE/design-oracle
 .venv/bin/python run_oracle.py "<URL>" <slug>
 ```
 

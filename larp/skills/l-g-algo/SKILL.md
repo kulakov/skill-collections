@@ -12,7 +12,7 @@ aliases:
 
 ## Источник промпта
 
-Полный промпт: `/Users/lance/lance-claude/09-REFERENCE/my-promts/Игры/Метод алгоритмов.md`
+Полный промпт: `~/09-REFERENCE/my-promts/Игры/Метод алгоритмов.md`
 
 ## Как работает
 

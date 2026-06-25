@@ -12,7 +12,7 @@ aliases:
 
 ## Источник промпта
 
-Полный промпт: `/Users/lance/lance-claude/09-REFERENCE/my-promts/Игры/Editing Methodology for Characters.md`
+Полный промпт: `~/09-REFERENCE/my-promts/Игры/Editing Methodology for Characters.md`
 
 ## Роль
 

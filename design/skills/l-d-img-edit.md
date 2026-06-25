@@ -13,7 +13,7 @@ aliases:
 
 Python-модуль `image_gen.py`:
 ```
-/Users/lance/lance-claude/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana/image_gen.py
+~/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana/image_gen.py
 ```
 
 Ключевые функции:
@@ -102,7 +102,7 @@ CRITICAL: maintain exact same camera angle, perspective, and composition as the 
 ### Фаза 4: ИСПОЛНЕНИЕ
 
 ```python
-cd /Users/lance/lance-claude/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana
+cd ~/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana
 python3 -c "
 from image_gen import generate, new_session
 new_session()

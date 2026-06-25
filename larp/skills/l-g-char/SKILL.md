@@ -13,7 +13,7 @@ aliases:
 
 ## Источник промпта
 
-Полный промпт: `/Users/lance/lance-claude/09-REFERENCE/my-promts/Игры/Загружалка - Dropbox Paper.md`
+Полный промпт: `~/09-REFERENCE/my-promts/Игры/Загружалка - Dropbox Paper.md`
 
 ## Роли проводников
 

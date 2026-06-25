@@ -22,7 +22,7 @@ allowed-tools: Read, Write, Edit, Bash, WebFetch, WebSearch, Glob, Grep
 
 Если пользователь дал URL — проанализировать через WebFetch.
 Если дал номер/название из каталога — прочитать паттерны из:
-`/Users/lance/lance-claude/10-CLAUDE/jetstyle-dreambooth-landing/ANALOG-CATALOG.md`
+`~/10-CLAUDE/jetstyle-dreambooth-landing/ANALOG-CATALOG.md`
 
 Если ничего не дал — спросить:
 

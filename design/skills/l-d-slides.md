@@ -18,14 +18,14 @@ Generate beautiful HTML slide presentations using the extended Slide Style Libra
 
 ## Key Locations
 
-**Template Library:** `/Users/lance/lance-claude/slide-templates-full.json`
+**Template Library:** `~/slide-templates-full.json`
 **Style Browser:** `~/.claude/style-library.html` (open → Slides tab)
 
 ## Workflow
 
 ### 1. Read Template Library
 
-Read `/Users/lance/lance-claude/slide-templates-full.json` which contains:
+Read `~/slide-templates-full.json` which contains:
 - 15 complete slide styles
 - Multiple template types per style: `title`, `content`, `quote`, `section`, `closing`, `data`, `twoColumn`, `code`, `terminal`, `cta`
 - Full CSS for each style (embedded in templates)

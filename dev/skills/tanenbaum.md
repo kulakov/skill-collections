@@ -10,7 +10,7 @@ aliases:
 
 ## Workflow
 
-1. Проверь наличие вики: `/Users/lance/lance-claude/09-REFERENCE/tanenbaum-wiki/`
+1. Проверь наличие вики: `~/09-REFERENCE/tanenbaum-wiki/`
 2. Если нет — сообщи пользователю команду для генерации (см. SKILL.md).
 3. Если есть — `Read INDEX.md` → `Grep GLOSSARY.md` → `Read wiki/<id>.md` → ходи по `[[wikilinks]]`.
 4. Решение цитируй ссылками на конкретные wiki-страницы.

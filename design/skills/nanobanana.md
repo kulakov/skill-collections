@@ -12,7 +12,7 @@ aliases:
 ## Расположение модуля
 
 ```
-/Users/lance/lance-claude/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana/image_gen.py
+~/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana/image_gen.py
 ```
 
 ## Как использовать
@@ -20,7 +20,7 @@ aliases:
 ### Базовая генерация
 
 ```bash
-cd /Users/lance/lance-claude/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana
+cd ~/09-REFERENCE/my-promts/claude/claude-artifacts/lesson-modules/3-nano-banana
 python3 -c "
 from image_gen import generate, new_session
 

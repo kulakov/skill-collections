@@ -5,7 +5,7 @@ description: "Google Sheets — чтение, запись, конвертаци
 # Google Sheets — чтение, запись, конвертация
 
 MCP-сервер: `gsheets` (mcp-gsheets)
-Service account: `claude-sheets@gen-lang-client-0475653459.iam.gserviceaccount.com`
+Service account: `<твой-service-account>@<gcp-project>.iam.gserviceaccount.com`
 
 ## Подключение таблицы
 
@@ -72,7 +72,7 @@ Service account: `claude-sheets@gen-lang-client-0475653459.iam.gserviceaccount.c
 
 | Ошибка | Причина | Решение |
 |--------|---------|---------|
-| 403 Forbidden | Таблица не расшарена | Расшарить на `claude-sheets@gen-lang-client-0475653459.iam.gserviceaccount.com` |
+| 403 Forbidden | Таблица не расшарена | Расшарить на `<твой-service-account>@<gcp-project>.iam.gserviceaccount.com` |
 | 404 Not Found | Неверный spreadsheetId | Проверить URL |
 | Sheets API not enabled | API не включён | Включить в Google Cloud Console |
 | MCP not available | Сервер не запущен | Рестартнуть Claude Code |

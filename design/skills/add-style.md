@@ -30,7 +30,7 @@ Thumbnails go to:
 2. **If extracting from image:**
    ```python
    import sys
-   sys.path.insert(0, '/Users/lance/Documents/claude-code-course/lesson-modules/3-nano-banana')
+   sys.path.insert(0, '~/Documents/claude-code-course/lesson-modules/3-nano-banana')
    from style_extract import extract_style
    style_description = extract_style('IMAGE_PATH')
    ```
@@ -48,7 +48,7 @@ Thumbnails go to:
 5. **Generate a sample image** using the style to create a thumbnail:
    ```python
    import sys
-   sys.path.insert(0, '/Users/lance/Documents/claude-code-course/lesson-modules/3-nano-banana')
+   sys.path.insert(0, '~/Documents/claude-code-course/lesson-modules/3-nano-banana')
    from image_gen import generate
    # Generate a sample that showcases the style
    ```

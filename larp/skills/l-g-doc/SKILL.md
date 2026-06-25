@@ -13,7 +13,7 @@ aliases:
 
 ## Источник промпта
 
-Полный промпт: `/Users/lance/lance-claude/09-REFERENCE/my-promts/Игры/LARP Director Box.md`
+Полный промпт: `~/09-REFERENCE/my-promts/Игры/LARP Director Box.md`
 
 ## Структура документации
 

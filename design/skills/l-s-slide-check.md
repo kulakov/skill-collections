@@ -107,5 +107,5 @@ If the user chooses to fix, apply changes directly to the HTML file using Edit t
 ### Reference
 
 The full production principles are documented in the Slide Style Library:
-`/Users/lance/Documents/claude-code-course/lesson-modules/3-nano-banana/3.1-intro-to-image-gen/3.1.4-style-database/slide-style-library.html`
+`~/Documents/claude-code-course/lesson-modules/3-nano-banana/3.1-intro-to-image-gen/3.1.4-style-database/slide-style-library.html`
 (see "Production principles for all styles" section in the header)

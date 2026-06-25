@@ -12,9 +12,9 @@ aliases:
 
 ## Модель и зависимости
 
-- **Модель:** `/Users/lance/ComfyUI/models/Aura-SR/model.safetensors` (2.3 GB)
-- **Config:** `/Users/lance/ComfyUI/models/Aura-SR/config.json`
-- **Python venv:** `/Users/lance/ComfyUI/venv/bin/python3`
+- **Модель:** `~/ComfyUI/models/Aura-SR/model.safetensors` (2.3 GB)
+- **Config:** `~/ComfyUI/models/Aura-SR/config.json`
+- **Python venv:** `~/ComfyUI/venv/bin/python3`
 - **Пакет:** `aura-sr` (установлен в ComfyUI venv)
 - **ComfyUI нода:** `~/ComfyUI/custom_nodes/AuraSR-ComfyUI/` (тоже установлена)
 
@@ -27,7 +27,7 @@ aliases:
 ### Скрипт апскейла
 
 ```bash
-/Users/lance/ComfyUI/venv/bin/python3 << 'PYEOF'
+~/ComfyUI/venv/bin/python3 << 'PYEOF'
 import time, json, os
 import torch
 from pathlib import Path
@@ -36,7 +36,7 @@ from safetensors.torch import load_file
 from aura_sr import AuraSR
 
 device = "mps"
-model_dir = Path("/Users/lance/ComfyUI/models/Aura-SR")
+model_dir = Path("~/ComfyUI/models/Aura-SR")
 
 # Load model
 config = json.loads((model_dir / "config.json").read_text())
