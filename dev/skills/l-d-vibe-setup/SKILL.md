@@ -28,8 +28,8 @@ description: "Управление сетапом вайб-дизайна JetSty
 
 | Документ | Путь |
 |---|---|
-| SOP | `10-CLAUDE/vibe-coding-sop.md` |
-| CLAUDE.md template | `10-CLAUDE/vibe-coding-claude-md-template.md` |
+| SOP | `templates/SOP.md (в этой папке)` |
+| CLAUDE.md template | `templates/CLAUDE.md (в этой папке)` |
 | Roadmap | `10-CLAUDE/2026-03-10_vibe-design-setup.md` |
 | Problems | `10-CLAUDE/2026-03-10_vibe-design-problems.md` |
 | Solutions | `10-CLAUDE/2026-03-10_vibe-design-solutions.md` |
@@ -73,7 +73,7 @@ description: "Управление сетапом вайб-дизайна JetSty
 Создай новый проект по шаблону:
 
 1. Создай папку `10-CLAUDE/<name>/`
-2. Прочитай `10-CLAUDE/vibe-coding-claude-md-template.md`
+2. Прочитай `templates/CLAUDE.md (в этой папке)`
 3. Создай `CLAUDE.md` из шаблона, спроси пользователя: клиент, тип проекта, CMS
 4. Создай пустые файлы: `requirements.md`, `design-decisions.md`, `tasks.md`
 5. Спроси: "Инициализировать Next.js + Tailwind + shadcn? (y/n)"
@@ -85,7 +85,7 @@ description: "Управление сетапом вайб-дизайна JetSty
 
 ## Команда: sop
 
-Покажи содержимое `10-CLAUDE/vibe-coding-sop.md`.
+Покажи содержимое `templates/SOP.md (в этой папке)`.
 
 ## Команда: cms-decision
 
