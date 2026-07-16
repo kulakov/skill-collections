@@ -55,7 +55,7 @@ function open_(id){const x=D[id]; if(!x)return;
  mo.innerHTML=`<button class="x" id="mx">×</button><div class="m-nm">/${esc(x.name)}</div><div class="m-desc">${esc(x.desc)}</div>${ex}
    <div class="m-sec"><h4>Подробное описание</h4><div class="m-full" id="mfull">загрузка…</div></div>
    <div class="m-sec"><h4>Скопировать себе ${x.isdir?'(папка-скилл)':'(команда)'}</h4><div class="code"><code>${esc(x.install)}</code><button class="cp" id="cp">Копировать</button></div>${zipalt}</div>
-   <div class="m-foot"><a class="gh" href="${esc(x.git)}" target="_blank">Открыть на GitHub →</a> <a class="gh" href="#${esc(x.name)}" id="mpl" style="margin-left:12px">Скопировать пермалинк</a></div>`;
+   <div class="m-foot"><a class="gh" href="${esc(x.git)}" target="_blank">Открыть на GitHub →</a> <a class="gh" href="#${esc(x.name)}" id="mpl" style="margin-left:12px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:5px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Скопировать пермалинк</a></div>`;
  bd.classList.add('show');mo.scrollTop=0;
  if(decodeURIComponent(location.hash.slice(1))!==id)history.replaceState(null,'','#'+encodeURIComponent(id));
  document.getElementById('mx').onclick=close_;
