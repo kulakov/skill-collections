@@ -246,6 +246,19 @@ Related skills in this collection:
 - memory-systems - Cross-agent memory
 - context-optimization - Partitioning strategies
 
+## Production Coordination (A2A + MCP)
+
+*(grafted from `NirDiamant/agents-towards-production`; для прод-чеклиста → скилл `agent-to-prod`)*
+
+Когда система переходит из дева в прод, два протокола закрывают координацию:
+
+- **MCP = агент↔возможность** («USB-C для AI»). Тулы на сервере через `@mcp.tool()` (типизированная сигнатура + docstring = спека для LLM). Host-цикл из 4 фаз: discovery (`list_tools()`) → planning (LLM выбирает) → execution → interpretation. **Прод-правило: persistent connection**, не новая на каждый вызов (туториал в деве открывает свежий коннект для изоляции — в проде это латентность).
+- **A2A = агент↔агент** (комплементарен MCP; A2A-участник внутри может звать MCP). Концепты: **Agent Card** (публичный дескриптор capability/auth, через `A2ACardResolver` с well-known URI = discovery), **Agent Skill** (id/name/tags/examples), **Artifact** (выход), JSON-RPC методы `tasks/send` / `tasks/get` / `tasks/cancel`.
+- **Прод-паттерн сервера:** `AgentExecutor.execute(context, event_queue)`, отдача через `A2AStarletteApplication` + `DefaultRequestHandler` + **TaskStore**. ⚠️ `InMemoryTaskStore` только для дева — **в проде персистентный стор (Redis/DB)**.
+- **Оркестратор/воркеры:** `UserFacingAgent` фанит `tasks/send` спец-агентам (NewsInfoAgent, EventsInfoAgent), дефенсивно достаёт контент из ответов, компилирует. Чистая декомпозиция orchestrator/worker. Протокол поддерживает SSE-стриминг (Agent Card его анонсирует).
+
+**Observability мультиагента:** структурируй каждого агента как явный LangGraph-граф → каждая нода и каждый `tasks/send` отдельно трейсятся (LangSmith). Без этого мультиагентный прогон — чёрный ящик.
+
 External resources:
 - [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Multi-agent patterns and state management
 - [AutoGen Framework](https://microsoft.github.io/autogen/) - GroupChat and conversational patterns

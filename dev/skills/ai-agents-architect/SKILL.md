@@ -85,6 +85,22 @@ Dynamic tool discovery and management
 | Agent internals not logged or traceable | medium | Implement tracing: |
 | Fragile parsing of agent outputs | medium | Robust output handling: |
 
+## Production Patterns
+
+*(grafted from `NirDiamant/agents-towards-production`; для полного прохода до прода → скилл `agent-to-prod`)*
+
+### Memory — CoALA taxonomy
+Не «храни диалог», а раздели по типам: **episodic** (опыт/преференции юзера), **semantic** (доменное знание), **procedural** (зашито в код воркфлоу, не хранится). Default-архитектура: short-term = checkpointer per thread (переживает рестарт), long-term = vector store с метаданными (user_id/тип/таймстемп). **Дедуп перед записью** (`similar_memory_exists()`) + **summarization-нода** после N сообщений, чтобы не разорвать контекст-окно. Tool-based память (агент сам зовёт store/retrieve) дешевле по токенам; manual (извлекаем каждый ход) богаче контекстом.
+
+### Observability — from day one
+Трейсинг включают ДО фич, не после инцидента. Структурируй агента как явный граф → каждая нода трейсится отдельно. Логируй полную траекторию: путь, вход/выход/тайминг ноды, точные промпты+ответы, tool-calls, **токены и стоимость per call**. Алерты на: latency, cost по типу запроса, error-rate по категории, паттерны тулов.
+
+### Guardrails — 3 точки
+Input (сообщение юзера) + output (ответ агента, судим по паре вход+выход) + tool (до И после вызова — выход тула возвращается в контекст = атак-поверхность). Guardrail = дешёвая быстрая модель параллельно, трип-вайр срабатывает ДО дорогого вызова. **Human-in-the-loop на необратимом** (send/delete/pay) через `interrupt`; read-only = авто.
+
+### Eval — behavioral, не статика
+Политики агента пиши явно в промпте → генери адверсариальные сценарии, ломающие каждую политику (симуляция многоходового юзера). Judge-модель отдели от agent-модели.
+
 ## Related Skills
 
-Works well with: `rag-engineer`, `prompt-engineer`, `backend`, `mcp-builder`
+Works well with: `agent-to-prod` (production-чеклист), `multi-agent-patterns`, `mcp-builder`, `rag-engineer`, `prompt-engineer`, `backend`

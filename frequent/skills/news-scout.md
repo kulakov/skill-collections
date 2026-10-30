@@ -5,18 +5,19 @@ description: "Daily delta-research digest. Triggers: 'news scout', 'дайдже
 
 # News Scout — Delta-Research Daily Digest
 
-You are a delta-research agent. Your job: find NEW signals across 3 topics, deduplicate, and deliver a concise digest to Telegram.
+You are a delta-research agent. Your job: find NEW signals across the topics from sources.json, deduplicate, and deliver a concise digest to Telegram.
 
 ## Config
 
 **Sources are defined in `10-CLAUDE/news-scout/data/sources.json`** — read this file first.
 
 Structure:
-- `topics` — 5 topics (dzun, jetstyle, attraction, funding, craft), each with name/OKR/keywords
+- `topics` — each with name/OKR/keywords/cadence. `cadence: "daily"` — every run; `cadence: "weekly"` + `day` — include ONLY when today's weekday matches (Europe/Warsaw). Skip weekly topics on other days entirely (no sources fetched, no searches).
+- `muted` — kicked sources. NEVER fetch a source listed here. Entries: {kind, id, name, muted_at}.
 - `telegram` — TG channels, each tagged with a topic
 - `rss` — RSS/Atom feeds, each tagged with a topic
 - `youtube` — YouTube channels (fetched via t.me or youtube.com/@handle/videos), each with topic
-- `web` — static web pages to monitor for changes (blogs, changelogs)
+- `web` — static web pages to monitor for changes (blogs, changelogs, listings)
 
 FACTS_DIR: `10-CLAUDE/news-scout/data` — one facts-{topic}.md per topic.
 
@@ -24,7 +25,10 @@ FACTS_DIR: `10-CLAUDE/news-scout/data` — one facts-{topic}.md per topic.
 
 ### Step 1: Load config + exclusion lists
 1. Read `10-CLAUDE/news-scout/data/sources.json` — get topics, TG channels, RSS feeds, YouTube, web sources
-2. For each topic in config, read the last 50 lines of `facts-{topic}.md` (create file if missing)
+2. Determine ACTIVE topics for today: all daily topics + weekly topics whose `day` matches today's weekday. Work only with active topics and their sources.
+3. Filter out muted sources: any source whose channel/url appears in the `muted` array is skipped without fetching.
+4. For each active topic, read the FIRST ~80 lines of `facts-{topic}.md` (create file if missing) — new facts are PREPENDED to the top (see Step 8), so the top of the file is the most recent history. Do NOT use `tail`/"last N lines" for this — that reads the OLDEST entries and will cause stale exclusion lists and duplicate signals.
+5. If topic `platforms` is ACTIVE today: read `10-CLAUDE/news-scout/data/platform-flags-delta.md`. It is a pre-computed, deterministic diff of feature flags on selfpub platforms, produced by a probe that runs daily. Treat every ПОЯВИЛСЯ / УБРАН / ПЕРЕКЛЮЧЁН line as a first-class signal for the `platforms` topic — it is a decision already shipped into a product, which outranks any blog announcement. Ignore the file if it says «Изменений нет». Never treat an unreachable source noted in that file as a change.
 
 Build internal exclusion list per topic — signals already known. Do NOT repeat them unless there is genuinely new data.
 
@@ -61,25 +65,42 @@ For each URL: WebFetch with prompt "Extract new items/posts/entries since last 2
 For changelog/blog pages, track what's new compared to previous runs.
 
 ### Step 3: Classify channel posts by topic
-For each post, determine which topic(s) it relates to:
-- **dzun**: AI, coding tools, vibe-coding, no-code, builders, LLM, startups building software
-- **larp**: LARP, role-playing games, game design methodology, narrative design, Nordic larp
-- **jetstyle**: Agency business, design services, marketing channels, DaaS, client acquisition, AI in agencies, XR/VR business
+For each post, determine which topic(s) it relates to. Use each topic's `keywords` from sources.json as the classification guide. Orientation for the trickier ones:
+- **jerian**: любые упоминания игры The Life and Suffering of Prince Jerian / «Принц Джериан» + релизы/запуски игр-конкурентов (choices matter, interactive fiction, CRPG класса Бранте)
+- **steamdev**: Steam/Valve как платформа и геймдев-индустрия — правила Steam, фесты, дискавери, маркетинг игр, wishlists, продажи, инди-рынок
+- **selfpub**: рынок и платформы, НЕ промо отдельных книг (промо-посты конкурентов — сигнал только если видна платформенная механика или цифры)
+- **xrvr**: бизнес-сторона XR; игровые обзоры и моды — discard
+- **tracking**: новый приём/кейс с разбором; анонсы курсов — discard
+- **stages**: сигнал обязан содержать дедлайн подачи или дату события
+- **mentions**: только упоминания, требующие действия или заметные охватом
+- **vitality**: только исследования с эффектами; лайфстайл-советы — discard
 - **general**: Interesting but doesn't fit any topic — skip unless truly remarkable
 
-Posts that don't match any topic → discard.
+Classify only into ACTIVE topics today (Step 1). IMPORTANT: новости про AI-модели, AI-кодинг, вайб-кодинг, LLM-вендоров (OpenAI, Anthropic, Cursor и т.п.) — НЕ тема дайджеста, discard. Исключение: AI-политики Steam/Valve и AI-скандалы в геймдеве → steamdev.
 
-### Step 4: Cross-channel deduplication
-If the same news/event appears in multiple channels:
-- Keep ONE entry
-- Note: "(@channel1 + N more channels)"
+Posts that don't match any active topic → discard.
+
+### Step 4: Deduplication — one story = one entry, GLOBALLY
+Two levels, both mandatory:
+
+**4a. Cross-channel:** the same news/event in multiple channels → keep ONE entry, note "(@channel1 + N ещё)". The link goes to the best source (original > repost).
+
+**4b. Cross-topic:** the same story matching several topics (e.g. Valve AI-policy → steamdev + jerian; VR-контракт агентства → xrvr + jetstyle) → include it ONCE, in the single most relevant section. If the secondary angle matters, add one trailing line "также: {тема} — {полфразы почему}". NEVER describe the same event in two sections.
 
 ### Step 5: Web Research
-For each topic, do 1-2 targeted WebSearch queries for the last 24 hours:
+For each ACTIVE topic, do 1-2 targeted WebSearch queries for the last 24 hours (weekly topics: last 7 days). Four topics are SEARCH-DRIVEN — for them this step is the primary source, do 2-3 queries:
 
-**dzun**: "vibe coding" OR "AI builder" OR "Lovable" OR "Bolt.new" OR "Replit" OR "Cursor" site:techcrunch.com OR site:producthunt.com
-**larp**: "larp design" OR "nordic larp" OR "larp methodology" site:nordiclarp.org OR site:analoggamestudies.org
-**jetstyle**: "design agency AI" OR "DaaS" OR "productized design" OR "agency business model 2026"
+**jerian**: "Prince Jerian" OR "Принц Джериан" OR "The Life and Suffering of Prince Jerian" — ищи упоминания где угодно (Reddit, DTF, StopGame, YouTube, кураторы Steam, форумы); вторая выборка — по-русски «Джериан» отзыв OR обзор OR стрим
+**steamdev**: Steam sales OR wishlists OR "Next Fest" OR Valve policy OR indie game marketing site:gamediscover.co OR site:howtomarketagame.com OR site:gamedeveloper.com OR site:steamdb.info
+**selfpub**: самиздат OR издательская платформа OR "Author.Today" OR ЛитРес новости платформы OR книжный рынок
+**craft**: "larp design" OR "nordic larp" OR "larp methodology" site:nordiclarp.org OR site:analoggamestudies.org
+**jetstyle**: "design agency" OR "DaaS" OR "productized design" OR "agency business model 2026"
+**xrvr**: enterprise XR deal OR VR training contract OR "IDC" XR headset OR Counterpoint XR (за 7 дней)
+**tracking**: трекинг стартапов кейс OR теория ограничений внедрение OR "theory of constraints" case (за 7 дней)
+**stages** (search-driven): call for speakers/papers 2026 геймдев OR продуктовые конференции OR книжные ярмарки заявки; подкасты ищут гостей (тема: AI-агентства, геймдев, книги); LARP-конвенты приём заявок. Сигнал без дедлайна/даты — discard
+**mentions** (search-driven): «Алексей Кулаков» JetStyle OR издательская платформа; JetStyle OR jet.style; «Бизнес-фэнтези» OR «Живые игры» Кулаков — за 7 дней, свои каналы Алексея не считаются
+**vitality** (search-driven): meta-analysis sleep energy OR vitality intervention OR burnout recovery RCT (за 7 дней; только исследования, source = журнал/препринт)
+**shortvideo** (search-driven): TikTok OR Reels OR Shorts algorithm change OR creator monetization update (за 7 дней)
 
 ### Step 6: Delta filter
 For each candidate signal, check against exclusion list:
@@ -105,15 +126,17 @@ Template:
 ```
 SCOUT DAILY — {date}
 
-AI / DZUN  {N} новых
+ДЖЕРИАН  {N} новых
 
-1. Suleyman: агенты на <b>месячные проекты к 2027</b>
-Вычисления выросли в триллион раз с 2010
-<i>"Semi-autonomous agents will manage month-long projects" — <a href="https://t.me/blognot/4521">@blognot</a></i>
+1. Обзор демо на <b>StopGame</b>: «нарративная жемчужина»
+Сравнивают с Бранте, хвалят иллюстрации
+<i><a href="https://stopgame.ru/...">stopgame.ru</a></i>
 
-2. Amazon <b>$200B capex</b> 2026, Trainium <b>$20B→$50B</b>
-AI-инфраструктура AWS становится самостоятельным бизнесом
-<i><a href="https://www.aboutamazon.com/news/company-news/amazon-ceo-andy-jassy-2025-letter-to-shareholders">Andy Jassy shareholder letter</a></i>
+STEAM / ГЕЙМДЕВ  {N} новых
+
+2. Valve: <b>Next Fest октября</b> — регистрация до 15 сентября
+Демо с фестиваля дают медианно <b>+2500 wishlists</b>
+<i><a href="https://howtomarketagame.com/...">howtomarketagame.com</a></i>
 
 LARP  {N} новых
 
@@ -128,8 +151,10 @@ AGENCY  {N} новых
 
 Нет новых: {topics where empty}
 
-Ответь номером — получишь подробности и действия
+Ответь номером — подробности, действия и кик источника
 ```
+
+Weekly topics appear as extra sections only on their day (помечай их «{Тема} — недельная сводка»). List only ACTIVE topics in "Нет новых".
 
 KEY RULES for source attribution:
 - Telegram post WITH exact text from WebFetch: direct quote in "" + link https://t.me/channel/postID
@@ -150,19 +175,26 @@ After formatting, save a signal index file for interactive follow-up:
 Format:
 ```json
 {
-  "date": "2026-04-05",
+  "date": "2026-08-02",
   "signals": {
     "1": {
-      "topic": "dzun",
-      "title": "OpenAI $122B",
+      "topic": "steamdev",
+      "title": "Valve обновила правила AI-disclosure",
       "detail": "one-line for the digest message",
       "theses": "3-5 bullet points summarizing key implications:\n- thesis 1\n- thesis 2\n- thesis 3",
       "source": "...",
-      "source_url": "..."
+      "source_url": "...",
+      "source_kind": "tg",
+      "source_id": "indiespotlight"
     }
   }
 }
 ```
+
+`source_kind` + `source_id` power the "Кик источник" button in Telegram (bot moves the source into `muted` in sources.json). Fill them for every signal that came from a configured source:
+- tg → channel name without @ (as in sources.json)
+- rss / web / yt → the exact `url`/`channel` value from sources.json
+- signal from WebSearch (not from a configured source) → `source_kind: "search"`, `source_id: null` (nothing to kick)
 
 The `theses` field is CRITICAL — it powers the "Подробнее" button in Telegram.
 For each signal, write 3-5 short theses answering: what happened, why it matters, what it means for the topic.
@@ -170,7 +202,7 @@ Do NOT repeat the `detail` text — theses should add context and interpretation
 
 IMPORTANT: End every theses block with a section "Для моих целей:" that maps the signal to Lance's OKR:
 - O1: JetStyle самоуправляемый и прибыльный
-- O3: Новый быстро растущий бизнес (Dzun/Hodman)
+- O3: Новый быстро растущий бизнес (клиентская компания/партнёрский проект)
 - O4: Масштабируемый канал привлечения клиентов
 - O7: Произведения которыми горжусь (LARP, книги)
 - O8: Схизма (книга)

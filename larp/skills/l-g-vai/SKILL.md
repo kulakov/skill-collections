@@ -17,7 +17,7 @@ aliases:
 ## Дополнительные материалы
 
 - Презентация "Системный геймдизайн": `~/09-REFERENCE/Библиотека/системный геймдизайн — презентация Вая.md`
-- PDF: https://drive.google.com/file/d/1k4aCADgTVM9no5FAA3XFwjp3ZDLhC85x/view
+- PDF: https://drive.google.com/file/d/<id-документа>/view
 
 ## Использование
 

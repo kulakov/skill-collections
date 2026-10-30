@@ -63,7 +63,7 @@ claude-local() {
 - thinking-partner, коуч-сессии
 - thesis-extraction, big-summary
 - Контент от имени Lance (стиль)
-- spec-driven на сложных фичах
+- sdd-spec-* на сложных фичах
 
 ## Известные ограничения
 

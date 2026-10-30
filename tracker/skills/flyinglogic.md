@@ -37,7 +37,7 @@ python3 "09-REFERENCE/my-promts/ TOC diagram/flyinglogic_generator.py" \
 
 - **Генератор:** `09-REFERENCE/my-promts/ TOC diagram/flyinglogic_generator.py` — он и есть спека формата.
 - **Canonical-шаблон:** `09-REFERENCE/my-promts/ TOC diagram/templates/toc-crt.xlogic` (донор обвязки 3.0.1).
-- **Эталонный вход:** `11-TRACKER/teams/kindred/research/crt-communities.flyinglogic.json`.
+- **Эталонный вход:** `11-TRACKER/teams/<команда>/research/crt-communities.flyinglogic.json`.
 - Старый `thesis-extraction-module-flyinglogic.md` — НЕ читать как спеку формата (там устаревшее описание).
 - **Mermaid/GraphViz модули:** рядом в `09-REFERENCE/my-promts/ TOC diagram/` (доп. визуал, не `.xlogic`).
 
@@ -57,7 +57,7 @@ python3 "09-REFERENCE/my-promts/ TOC diagram/flyinglogic_generator.py" \
   ]
 }
 ```
-Эталон входа — рядом: `11-TRACKER/teams/kindred/research/crt-communities.flyinglogic.json` (CRT) и
+Эталон входа — рядом: `11-TRACKER/teams/<команда>/research/crt-communities.flyinglogic.json` (CRT) и
 `frt-communities.flyinglogic.json` (FRT).
 
 **Классы узлов (домен ТОС, цвета вшиты в canonical-шаблон):**

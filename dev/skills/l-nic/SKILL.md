@@ -206,8 +206,8 @@ project-name/
 
 ## Integration
 
-- Works with `/dev-workflow` — after SPEC, switch to dev-workflow for implementation
-- Works with `/spec-driven` — SPEC.md becomes the spec for spec-driven development
+- Works with `/sdd-spec-*` — after SPEC, switch to sdd-spec-tasks → sdd-spec-impl for implementation
+- SPEC.md becomes the input for `/sdd-spec-requirements`
 - Works with `/l-t-crit` — can run critical analysis as an extended Challenge
 - Works with `/l-t-deep-research` — can trigger research during Challenge (connection 2)
 

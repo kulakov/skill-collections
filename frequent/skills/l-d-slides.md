@@ -1,5 +1,5 @@
 ---
-description: "Генератор HTML-презентаций из markdown. Используй когда пользователь просит сделать презентацию, слайды, доклад в HTML, говорит 'сделай слайды', 'create slides', 'HTML presentation', 'l-d-slides'. НЕ используй для: PPTX (pptx), сториз (l-k-stories), старого генератора (l-d-slides-old)."---. Выход: один HTML-файл с навигацией (стрелки, клик, свайп). НЕ используй для: генерации картинок (/nanobanana), PowerPoint файлов (/pptx), проверки композиции слайдов (/l-s-slide-check), подгонки контента (/l-s-slide-fit), добавления нового стиля (/l-s-slide-add)."
+description: "Генератор HTML-презентаций из markdown. Используй когда пользователь просит сделать презентацию, слайды, доклад в HTML, говорит 'сделай слайды', 'create slides', 'HTML presentation', 'l-d-slides'. Выход: один HTML-файл с навигацией (стрелки, клик, свайп). НЕ используй для: PPTX (pptx), сториз (l-k-stories), полного цикла создания презентации с нуля — от темы и интервью до PPTX и репетиции (presentation-builder), генерации картинок (nanobanana), проверки композиции слайдов (l-s-slide-check), подгонки контента (l-s-slide-fit), добавления нового стиля (l-s-slide-add)."
 aliases:
   - l-slides
 ---
@@ -18,15 +18,29 @@ Generate beautiful HTML slide presentations using the extended Slide Style Libra
 
 ## Key Locations
 
-**Template Library:** `~/slide-templates-full.json`
+**Template Library:** `~/10-CLAUDE/slide-tools/slide-templates-full.json`
 **Style Browser:** `~/.claude/style-library.html` (open → Slides tab)
+**Autofit Engine:** `~/10-CLAUDE/slide-tools/slide-autofit.js` (MUST be injected before `</body>` in every generated deck — see "Fill the slide" below)
+
+## Fill the slide (MANDATORY)
+
+Visual content must **fill the slide entirely, within padding** — never float tiny in empty space. Two mechanisms, always both:
+
+1. **Native fill (templates):** every style template is full-bleed and sized to fill. The contract:
+   - `.sb` — full-bleed wrapper (`position:absolute;inset:0`): background, base font/color, padding, centering.
+   - `.fc` — the auto-sized content block (title/heading/bullets/quote). The engine measures/scales this.
+   - Edge decorations (footers, page rules, accent bars, frames, sidebars, terminal prompt, scanlines) are `position:absolute`, pinned to edges, **outside `.fc`** so they never scale.
+   - Type is generous: title 110–180px, section 96–140px, content heading 56–76px / body 26–34px, quote 44–64px.
+2. **Autofit engine (safety net):** inject `slide-autofit.js` before `</body>`. It scales each slide's `.fc` to fill the slide box minus padding — scales DOWN on overflow, UP on under-fill, no-ops when native fill is already good. Slides without `.fc` are skipped (they fill natively).
+
+When generating: read `slide-autofit.js` and embed its contents inside a `<script>` tag right before `</body>`.
 
 ## Workflow
 
 ### 1. Read Template Library
 
-Read `~/slide-templates-full.json` which contains:
-- 15 complete slide styles
+Read `~/10-CLAUDE/slide-tools/slide-templates-full.json` which contains:
+- 20 complete slide styles
 - Multiple template types per style: `title`, `content`, `quote`, `section`, `closing`, `data`, `twoColumn`, `code`, `terminal`, `cta`
 - Full CSS for each style (embedded in templates)
 
@@ -228,9 +242,13 @@ For each slide:
     });
     go(0);
   </script>
+  <!-- AUTOFIT: embed full contents of slide-tools/slide-autofit.js here -->
+  <script> /* contents of ~/10-CLAUDE/slide-tools/slide-autofit.js */ </script>
 </body>
 </html>
 ```
+
+> **Required:** before writing the file, Read `~/10-CLAUDE/slide-tools/slide-autofit.js` and paste its full contents into the second `<script>` above. This is what guarantees every slide fills within padding. Do not skip it.
 
 #### Step 4: Save and Open
 

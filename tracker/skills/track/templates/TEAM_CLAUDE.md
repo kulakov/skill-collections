@@ -7,10 +7,10 @@
 - **Проект:** [PROJECT_DESC]
 - **Slug:** [TEAM_SLUG]
 - **Участники:** [TEAM_MEMBERS]
-- **Track State:** `11-TRACKER/teams/[TEAM_SLUG]/STATE.md`
-- **Дневник:** `11-TRACKER/teams/[TEAM_SLUG]/DIARY.md`
-- **Транскрипты:** `11-TRACKER/teams/[TEAM_SLUG]/transcripts/`
-- **Рабочие материалы:** `01-WORK/Контур/[FOLDER_NAME]/`
+- **Track State:** `11-TRACKER/teams/<команда>/STATE.md`
+- **Дневник:** `11-TRACKER/teams/<команда>/DIARY.md`
+- **Транскрипты:** `11-TRACKER/teams/<команда>/transcripts/`
+- **Рабочие материалы:** `01-WORK/<клиент>/[FOLDER_NAME]/`
 - **Каталог методов:** `11-TRACKER/METHODS_CATALOG.md`
 
 ## Текущее состояние
@@ -36,7 +36,7 @@
    - Другое -> спросить зачем
 
 2. **Транскрипт -> Debrief pipeline:**
-   - Скопировать в `11-TRACKER/teams/[TEAM_SLUG]/transcripts/session-NN_YYYY-MM-DD.md`
+   - Скопировать в `11-TRACKER/teams/<команда>/transcripts/session-NN_YYYY-MM-DD.md`
    - Извлечь: решения, гипотезы, инсайты, action items
    - Оценить Светофор (предложить Lance)
    - Обновить Спидометр
@@ -78,10 +78,10 @@
 
 | Тип файла | Куда | Именование |
 |-----------|------|-----------|
-| Транскрипт Granola | `11-TRACKER/teams/[TEAM_SLUG]/transcripts/` | `session-NN_YYYY-MM-DD.md` |
-| Заметка/дневник | `11-TRACKER/teams/[TEAM_SLUG]/notes/` | `note_YYYY-MM-DD_[тема].md` |
-| Исследование | `11-TRACKER/teams/[TEAM_SLUG]/research/` | `research_YYYY-MM-DD_[тема].md` |
-| Рабочий документ | Остается в `01-WORK/Контур/[FOLDER_NAME]/` | Как есть |
+| Транскрипт Granola | `11-TRACKER/teams/<команда>/transcripts/` | `session-NN_YYYY-MM-DD.md` |
+| Заметка/дневник | `11-TRACKER/teams/<команда>/notes/` | `note_YYYY-MM-DD_[тема].md` |
+| Исследование | `11-TRACKER/teams/<команда>/research/` | `research_YYYY-MM-DD_[тема].md` |
+| Рабочий документ | Остается в `01-WORK/<клиент>/[FOLDER_NAME]/` | Как есть |
 
 ---
 

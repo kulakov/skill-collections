@@ -15,3 +15,25 @@ Apply the frontend-design skill principles:
 5. Design with intentionality - every choice should be deliberate
 
 Before coding, briefly describe your design concept and aesthetic direction.
+
+---
+
+## Компонентная база — не выдумывать примитивы
+
+Перед генерацией интерфейса подними shadcn MCP в папке проекта, чтобы брать компоненты
+из реестра, а не сочинять их (первая итерация иначе выглядит нейросетевой):
+
+```bash
+npx shadcn@latest mcp init --client claude   # затем перезапуск и /mcp для проверки
+```
+
+Поверх базы — библиотеки-референсы. Порядок: shadcn/ui (база) → Unlumen UI
+(https://ui.unlumen.com/ — плавность и микровзаимодействия, ставится тем же shadcn CLI:
+`npx shadcn@latest add @unlumen-ui/[name]`) → Magic UI / Aceternity (вау-эффекты)
+→ Page UI (готовые секции).
+
+Полный справочник с составом и ценами:
+`~/10-CLAUDE/ui-component-library.md`, секции «Стартер-пак» и 14.
+
+Библиотека — источник блоков, а не замена дизайну: типографика, палитра и композиция
+по-прежнему на тебе.

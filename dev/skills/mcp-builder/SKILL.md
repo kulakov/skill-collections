@@ -146,6 +146,17 @@ Review for:
 
 See language-specific guides for detailed testing approaches and quality checklists.
 
+#### 3.3 Production Hardening
+
+*(grafted from `NirDiamant/agents-towards-production`; полный прод-чеклист → скилл `agent-to-prod`)*
+
+Прежде чем считать MCP-сервер готовым к проду:
+- **Persistent connection**, не свежий коннект на каждый вызов тула. Открытие коннекта per-call (как в учебных туториалах для изоляции стейта) в проде — лишняя латентность.
+- **Tool guardrails в lifecycle-хуках:** `on_tool_start` сканирует имя+описание тула ДО выполнения (ловит malicious/unauthorized tool), `on_tool_end` сканирует выход тула (ловит инъекцию в данных, которые вернутся в контекст агента). Хук блокирует, бросая исключение.
+- **Human-in-the-loop на необратимых тулах:** классифицируй тулы — read-only авто, create/send/delete/pay оборачивай в подтверждение (LangGraph `interrupt`). Read-пути остаются быстрыми.
+- **Secure auth для multi-user:** не Personal Access Token, а OAuth2 per-provider со scoped-доступом (паттерн Arcade) — агент не хранит креды, авторизация persists после первого гранта.
+- **Трейсинг tool-calls:** логируй запрос/ответ/длительность/успех каждого вызова + токены — иначе непонятно, какой тул тормозит или зовётся зря.
+
 ---
 
 ### Phase 4: Create Evaluations
