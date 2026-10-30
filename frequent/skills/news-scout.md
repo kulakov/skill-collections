@@ -201,11 +201,7 @@ For each signal, write 3-5 short theses answering: what happened, why it matters
 Do NOT repeat the `detail` text — theses should add context and interpretation.
 
 IMPORTANT: End every theses block with a section "Для моих целей:" that maps the signal to Lance's OKR:
-- O1: JetStyle самоуправляемый и прибыльный
-- O3: Новый быстро растущий бизнес (клиентская компания/партнёрский проект)
-- O4: Масштабируемый канал привлечения клиентов
-- O7: Произведения которыми горжусь (LARP, книги)
-- O8: Схизма (книга)
+- <ваши цели или OKR, по строке на цель>
 
 Only mention relevant goals. If signal has no clear connection — write "Прямой связи с текущими целями нет, но полезно знать как контекст."
 
